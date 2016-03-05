@@ -1,7 +1,5 @@
 
-// flag for binary/text serialization
 // checkpoint 
-
 
 /*
 
@@ -35,44 +33,6 @@ class A : public Serializable {
         arr.save(c);
     }
 }
-
-int main() {
-    
-}
-
-
-*/
-
-
-/*
-
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-
-//********* Archive ***********
-template <class T>
-class Archive {
-private:
-    std::string _path;
-    std::ifstream input;
-    std::ofstream output;
-
-public:
-    Archive() {
-        input.open("archive", std::ios::in);
-        output.open("archive", std::ios::out);
-    }
-
-    ~Archive() {
-        input.close();
-        output.close();
-    }
-
-    friend Archive& operator<<(const Archive&, const T&) {
-
-    }
-};
 
 
 

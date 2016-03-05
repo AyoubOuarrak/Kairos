@@ -52,6 +52,17 @@ public:
     /** default distructor */
     virtual ~IArchive();
 
+    /** control if the stream is open */
+    bool isOpen() const;
+    /** open the input stream */
+    void openStream();
+    /** open the input stream with different mode */
+    void openStream(std::ios_base::openmode);
+    /** open the input stream with a different mode */
+    void openStream(std::string, std::ios_base::openmode);
+    /** close the input stream */
+    void closeStream();
+
     /** pure overloading of the operator >> */
     virtual IArchive<item_type>& operator>>(item_type& item) = 0;
 };
@@ -74,6 +85,17 @@ public:
     explicit OArchive(std::ofstream stream);
     /** default distructor */
     virtual ~OArchive();
+
+    /** control if the stream is open */
+    bool isOpen() const;
+    /** open the output stream */
+    void openStream();
+    /** open the ouput stream with different mode */
+    void openStream(std::ios_base::openmode);
+    /** open the ouput stream with a different mode */
+    void openStream(std::string, std::ios_base::openmode);
+    /** close the output stream */
+    void closeStream();
 
     /** pure overloading of the operator << */
     virtual OArchive<item_type>& operator<<(const item_type& item) = 0;
