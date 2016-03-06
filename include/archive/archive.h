@@ -11,8 +11,8 @@ namespace archive {
 /**
 *   Archive class, extend input archive and output archive
 */
-
-class Archive : public OArchive<int>, public IArchive<int> {
+template <class item_type>
+class Archive : public OArchive<item_type>, public IArchive<item_type> {
 
 protected:
     /** local path of the archive in filesystem */
@@ -27,10 +27,10 @@ public:
     virtual ~Archive();
 
     /** overloading of the << operator */
-    Archive& operator<<(const int& item);
+    Archive& operator<<(const item_type& item);
 
     /** overloading of the << operator */
-    Archive& operator>>(int& item);
+    Archive& operator>>(item_type& item);
 };
 
 #include "templates/archive.templates.h"

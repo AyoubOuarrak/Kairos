@@ -73,14 +73,14 @@ using namespace kairos;
 using namespace archive;
 
 int main() {
-    Archive arr;
+    Archive<char> arr;
 
-    arr << 9 << 12;
+    arr << 's' << 'g';
 
-    int a, b;
+    char a, b;
 
-    arr >> a;
-    arr >> b;
+    arr >> a >> b;
+
 
     std::cout << a << " " << b << std::endl;
 }

@@ -1,36 +1,56 @@
 
-Archive::Archive() : IArchive<int>(), OArchive<int>(), _archivePath(".") {
+/**
+*   Default constructor 
+*/
+template <class item_type>
+Archive<item_type>::Archive() : IArchive<item_type>(), OArchive<item_type>(), _archivePath(".") {
  
 }
 
-Archive::Archive(std::string path) : IArchive<int>(), OArchive<int>() {
+/**
+*   Second constructor 
+*/
+template <class item_type>
+Archive<item_type>::Archive(std::string path) : IArchive<item_type>(), OArchive<item_type>() {
     _archivePath = path;
 }
 
-Archive::~Archive() {
+/**
+*   Default distructor 
+*/
+template <class item_type>
+Archive<item_type>::~Archive() {
 
 }
 
-Archive& Archive::operator<<(const int& item) {
-    if(IArchive<int>::isOpen())
-        IArchive<int>::closeStream();
+/**
+*   Overloading operator <<
+*/
+template <class item_type>
+Archive<item_type>& Archive<item_type>::operator<<(const item_type& item) {
+    if(IArchive<item_type>::isOpen())
+        IArchive<item_type>::closeStream();
 
-    if(!OArchive<int>::isOpen())
-        OArchive<int>::openStream(std::ios::out | std::ios::app);
+    if(!OArchive<item_type>::isOpen())
+        OArchive<item_type>::openStream(std::ios::out | std::ios::app);
 
-    OArchive::stream << item;
-    OArchive::stream << " ";
+    OArchive<item_type>::stream << item;
+    OArchive<item_type>::stream << " ";
     return *this;
 }
 
-Archive& Archive::operator>>(int& item) { 
-    if(OArchive<int>::isOpen())
-        OArchive<int>::closeStream();
+/**
+*   Overloading operator >> 
+*/
+template <class item_type>
+Archive<item_type>& Archive<item_type>::operator>>(item_type& item) { 
+    if(OArchive<item_type>::isOpen())
+        OArchive<item_type>::closeStream();
 
-    if(!IArchive<int>::isOpen())
-        IArchive<int>::openStream(std::ios::in);
+    if(!IArchive<item_type>::isOpen())
+        IArchive<item_type>::openStream(std::ios::in);
 
-    IArchive::stream >> item;
+    IArchive<item_type>::stream >> item;
     return *this;
 }
 
