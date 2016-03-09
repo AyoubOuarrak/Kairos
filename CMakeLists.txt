@@ -3,6 +3,7 @@ project("kairos")
  
 include_directories(include/archive)
 include_directories(include/archive/templates)
+include_directories(include/archive/type)
   
 file(GLOB SOURCES "test/*.cpp")
  

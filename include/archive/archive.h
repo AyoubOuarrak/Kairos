@@ -17,7 +17,7 @@ class Archive : public OArchive<item_type>, public IArchive<item_type> {
 private:
     typedef OArchive<item_type> output_archive;
     typedef IArchive<item_type> input_archive;
-    typedef Basic_Archive<item_type> io_archive;
+    typedef BasicArchive<item_type> io_archive;
     
 protected:
     /** local path of the archive in filesystem */

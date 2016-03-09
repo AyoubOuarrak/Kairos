@@ -34,8 +34,8 @@ Archive<item_type>& Archive<item_type>::operator<<(const item_type& item) {
     if(!io_archive::isOutOpen())
         io_archive::openOutStream(std::ios::out | std::ios::app);
 
-    OArchive<item_type>::stream << item;
-    OArchive<item_type>::stream << " ";
+    //OArchive<item_type>::stream << item;
+    //OArchive<item_type>::stream << " ";
     return *this;
 }
 
@@ -50,7 +50,7 @@ Archive<item_type>& Archive<item_type>::operator>>(item_type& item) {
     if(!io_archive::isInOpen())
         io_archive::openInStream(std::ios::in);
 
-    IArchive<item_type>::stream >> item;
+    //IArchive<item_type>::stream >> item;
     return *this;
 }
 

@@ -66,23 +66,28 @@ public:
 
 
 
-#include "../include/archive/archive.h"
+#include "../include/archive/type/vector_archive.h"
 #include <iostream>
+#include <vector>
 
 using namespace kairos;
 using namespace archive;
 
 int main() {
-    Archive<char> arr;
+    std::vector<int> array;
+    for(int i = 0; i < 10; ++i)
+        array.push_back(i*2);
 
-    arr << 's' << 'g';
+    VectorArchive<int> arr;
 
-    char a, b;
+    arr << array;
 
-    arr >> a >> b;
+    std::vector<int> array1;
 
+    arr >> array1;
 
-    std::cout << a << " " << b << std::endl;
+    for(int i = 0; i < array1.size(); ++i)
+        std::cout << array1[i] << std::endl;
 }
 
 

@@ -23,11 +23,11 @@ protected:
 
 public:
     /** default constructor */
-    Basic_Archive();
+    BasicArchive();
     /** second constructor */
-    explicit Basic_Archive(std::string archive_name);
+    explicit BasicArchive(std::string archive_name);
     /** default distructor */
-    virtual ~Basic_Archive();
+    virtual ~BasicArchive();
 
     /** return the name of the archive */
     std::string name() const;
@@ -49,16 +49,16 @@ public:
     void closeOutStream();
 
     /** pure overloading of the operator << */
-    virtual Basic_Archive& operator<<(const item_type& item) = 0;
+    virtual BasicArchive& operator<<(const item_type& item) = 0;
     /** pure overloading of the operator >> */
-    virtual Basic_Archive& operator>>(item_type& item) = 0;
+    virtual BasicArchive& operator>>(item_type& item) = 0;
 };
 
 /**
 *   Input Archive class, extend Basic archive
 */
 template <class item_type>
-class IArchive : public virtual Basic_Archive<item_type> {
+class IArchive : public virtual BasicArchive<item_type> {
 
 protected:
 
@@ -80,7 +80,7 @@ public:
 *   Ouput Archive class, extend Basic archive 
 */
 template <class item_type>
-class OArchive : public virtual Basic_Archive<item_type> {
+class OArchive : public virtual BasicArchive<item_type> {
 
 protected:
     
