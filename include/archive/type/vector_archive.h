@@ -20,12 +20,12 @@ public:
     }
 
     VectorArchive& operator<<(const std::vector<vector_type>& item) {
-        /*if(io_archive::isInOpen())
+        if(io_archive::isInOpen())
             io_archive::closeInStream();
 
         if(!io_archive::isOutOpen())
             io_archive::openOutStream(std::ios::out | std::ios::app);
-*/
+
         for(int i = 0; i < item.size(); ++i) {
             io_archive::outStream << item[i];
             io_archive::outStream << " ";
