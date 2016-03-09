@@ -3,8 +3,9 @@
 *   Default construct of the basic archive, it set the name of the archive
 */
 template <class item_type>
-Basic_Archive<item_type>::Basic_Archive() : _archiveName("archive") {
-
+Basic_Archive<item_type>::Basic_Archive() : archiveName("archive") {
+    inStream.open(archiveName, std::ios::in);
+    outStream.open(archiveName, std::ios::out);
 }
 
 /**
@@ -12,8 +13,10 @@ Basic_Archive<item_type>::Basic_Archive() : _archiveName("archive") {
 *   param archiveName archive name
 */
 template <class item_type>
-Basic_Archive<item_type>::Basic_Archive(std::string archiveName) {
-    _archiveName = archiveName;
+Basic_Archive<item_type>::Basic_Archive(std::string _archiveName) {
+    archiveName = _archiveName;
+    inStream.open(archiveName, std::ios::in);
+    outStream.open(archiveName, std::ios::out);
 }
 
 /**
@@ -21,7 +24,8 @@ Basic_Archive<item_type>::Basic_Archive(std::string archiveName) {
 */
 template <class item_type> 
 Basic_Archive<item_type>::~Basic_Archive() {
-    
+    inStream.close();
+    outStream.close();
 }
 
 /**
@@ -29,7 +33,7 @@ Basic_Archive<item_type>::~Basic_Archive() {
 */
 template <class item_type>
 std::string Basic_Archive<item_type>::name() const {
-    return _archiveName;
+    return archiveName;
 }
 
 /**
@@ -37,7 +41,7 @@ std::string Basic_Archive<item_type>::name() const {
 */
 template <class item_type>
 IArchive<item_type>::IArchive() : Basic_Archive<item_type>() {
-    stream.open(Basic_Archive<item_type>::name(), std::ios::in);
+    
 }
 
 /**
@@ -46,7 +50,7 @@ IArchive<item_type>::IArchive() : Basic_Archive<item_type>() {
 */
 template <class item_type>
 IArchive<item_type>::IArchive(std::ifstream stream) {
-    stream = stream;
+    Basic_Archive<item_type>::inStream = stream;
 }
 
 /**
@@ -54,47 +58,89 @@ IArchive<item_type>::IArchive(std::ifstream stream) {
 */
 template <class item_type> 
 IArchive<item_type>::~IArchive() {
-    stream.close();
+    Basic_Archive<item_type>::inStream.close();
 }
 
 /**
 *   Return if the input stream is open
 */
 template <class item_type>
-bool IArchive<item_type>::isOpen() const {
-    return stream.is_open();
+bool Basic_Archive<item_type>::isInOpen() const {
+    return inStream.is_open();
+}
+
+/**
+*   Return if the output stream is open
+*/
+template <class item_type>
+bool Basic_Archive<item_type>::isOutOpen() const {
+    return outStream.is_open();
 }
 
 /** 
 *   Open the input stream 
 */
 template <class item_type>
-void IArchive<item_type>::openStream() {
-    stream.open(Basic_Archive<item_type>::name(), std::ios::in);
+void Basic_Archive<item_type>::openInStream() {
+    inStream.open(archiveName, std::ios::in);
+}
+
+/** 
+*   Open the output stream 
+*/
+template <class item_type>
+void Basic_Archive<item_type>::openOutStream() {
+    outStream.open(archiveName, std::ios::out);
 }
 
 /** 
 *   Open the input stream with a different mode 
 */
 template <class item_type>
-void IArchive<item_type>::openStream(std::ios_base::openmode mode) {
-    stream.open(Basic_Archive<item_type>::name(), mode);
+void Basic_Archive<item_type>::openInStream(std::ios_base::openmode mode) {
+    inStream.open(archiveName, mode);
+}
+
+/** 
+*   Open the output stream with a different mode 
+*/
+template <class item_type>
+void Basic_Archive<item_type>::openOutStream(std::ios_base::openmode mode) {
+    outStream.open(archiveName, mode);
 }
 
 /** 
 *   Open the input stream with a different mode 
 */
 template <class item_type>
-void IArchive<item_type>::openStream(std::string archive_name, std::ios_base::openmode mode) {
-    stream.open(archive_name, mode);
+void Basic_Archive<item_type>::openInStream(std::string archive_name, 
+                                               std::ios_base::openmode mode) {
+    inStream.open(archive_name, mode);
+}
+
+/** 
+*   Open the output stream with a different mode 
+*/
+template <class item_type>
+void Basic_Archive<item_type>::openOutStream(std::string archive_name, 
+                                                std::ios_base::openmode mode) {
+    outStream.open(archive_name, mode);
 }
 
 /** 
 *   Close the input stream 
 */
 template <class item_type>
-void IArchive<item_type>::closeStream() {
-    stream.close();
+void Basic_Archive<item_type>::closeInStream() {
+    inStream.close();
+}
+
+/** 
+*   Close the input stream 
+*/
+template <class item_type>
+void Basic_Archive<item_type>::closeOutStream() {
+    outStream.close();
 }
 
 /**
@@ -102,7 +148,7 @@ void IArchive<item_type>::closeStream() {
 */
 template <class item_type>
 OArchive<item_type>::OArchive() : Basic_Archive<item_type>() {
-    stream.open(Basic_Archive<item_type>::name(), std::ios::out);
+
 }
 
 /**
@@ -111,7 +157,7 @@ OArchive<item_type>::OArchive() : Basic_Archive<item_type>() {
 */
 template <class item_type>
 OArchive<item_type>::OArchive(std::ofstream stream) {
-    stream = stream;
+    Basic_Archive<item_type>::outStream = stream;
 }
 
 /**
@@ -119,45 +165,5 @@ OArchive<item_type>::OArchive(std::ofstream stream) {
 */
 template <class item_type> 
 OArchive<item_type>::~OArchive() {
-    stream.close();
-}
-
-/**
-*   Return if the output stream is open
-*/
-template <class item_type>
-bool OArchive<item_type>::isOpen() const {
-    return stream.is_open();
-}
-
-/** 
-*   Open the output stream 
-*/
-template <class item_type>
-void OArchive<item_type>::openStream() {
-    stream.open(Basic_Archive<item_type>::name(), std::ios::out);
-}
-
-/** 
-*   Open the ouput stream with a different mode 
-*/
-template <class item_type>
-void OArchive<item_type>::openStream(std::ios_base::openmode mode) {
-    stream.open(Basic_Archive<item_type>::name(), mode);
-}
-
-/** 
-*   Open the ouput stream with a different mode 
-*/
-template <class item_type>
-void OArchive<item_type>::openStream(std::string archive_name, std::ios_base::openmode mode) {
-    stream.open(archive_name, mode);
-}
-
-/** 
-*   Close the output stream 
-*/
-template <class item_type>
-void OArchive<item_type>::closeStream() {
-    stream.close();
+    Basic_Archive<item_type>::outStream.close();
 }

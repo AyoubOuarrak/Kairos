@@ -1,5 +1,5 @@
-#ifndef BASIC_ARCHIVE_GUARD
-#define BASIC_ARCHIVE_GUARD
+#ifndef ARCHIVE_BASIC_ARCHIVE_H
+#define ARCHIVE_BASIC_ARCHIVE_H
 
 #include <string>
 #include <fstream>
@@ -11,11 +11,15 @@ namespace archive {
 *   Basic Abstract Archive class
 */
 template <class item_type>
-class Basic_Archive {
+class BasicArchive {
 
 protected:
     /** archive name*/
-    std::string _archiveName;
+    std::string archiveName;
+    /** input stream*/
+    std::ifstream inStream;
+    /** input stream*/
+    std::ofstream outStream;
 
 public:
     /** default constructor */
@@ -27,6 +31,22 @@ public:
 
     /** return the name of the archive */
     std::string name() const;
+
+    /** control if the stream is open */
+    bool isInOpen() const;
+    bool isOutOpen() const;
+    /** open the input stream */
+    void openInStream();
+    void openOutStream();
+    /** open the input stream with different mode */
+    void openInStream(std::ios_base::openmode);
+    void openOutStream(std::ios_base::openmode);
+    /** open the input stream with a different mode */
+    void openInStream(std::string, std::ios_base::openmode);
+    void openOutStream(std::string, std::ios_base::openmode);
+    /** close the input stream */
+    void closeInStream();
+    void closeOutStream();
 
     /** pure overloading of the operator << */
     virtual Basic_Archive& operator<<(const item_type& item) = 0;
@@ -41,8 +61,7 @@ template <class item_type>
 class IArchive : public virtual Basic_Archive<item_type> {
 
 protected:
-    /** input stream*/
-    std::ifstream stream;
+
 
 public:
     /** default constructor */
@@ -51,17 +70,6 @@ public:
     explicit IArchive(std::ifstream steam);
     /** default distructor */
     virtual ~IArchive();
-
-    /** control if the stream is open */
-    bool isOpen() const;
-    /** open the input stream */
-    void openStream();
-    /** open the input stream with different mode */
-    void openStream(std::ios_base::openmode);
-    /** open the input stream with a different mode */
-    void openStream(std::string, std::ios_base::openmode);
-    /** close the input stream */
-    void closeStream();
 
     /** pure overloading of the operator >> */
     virtual IArchive<item_type>& operator>>(item_type& item) = 0;
@@ -75,8 +83,7 @@ template <class item_type>
 class OArchive : public virtual Basic_Archive<item_type> {
 
 protected:
-    /** input stream*/
-    std::ofstream stream;
+    
 
 public:
     /** default constructor */
@@ -85,17 +92,6 @@ public:
     explicit OArchive(std::ofstream stream);
     /** default distructor */
     virtual ~OArchive();
-
-    /** control if the stream is open */
-    bool isOpen() const;
-    /** open the output stream */
-    void openStream();
-    /** open the ouput stream with different mode */
-    void openStream(std::ios_base::openmode);
-    /** open the ouput stream with a different mode */
-    void openStream(std::string, std::ios_base::openmode);
-    /** close the output stream */
-    void closeStream();
 
     /** pure overloading of the operator << */
     virtual OArchive<item_type>& operator<<(const item_type& item) = 0;
