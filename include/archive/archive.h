@@ -26,6 +26,8 @@ protected:
 public:
     /** default constructor */
     Archive();
+    /** copy operator */
+    Archive(const Archive&);
     /** second constructor */
     Archive(std::string path);
     /** default distructor */

@@ -8,6 +8,14 @@ Archive<item_type>::Archive() : input_archive(), output_archive(), archivePath("
 }
 
 /**
+*   copy operator
+*/
+template <class item_type>
+Archive<item_type>::Archive(const Archive& archive_) {
+
+} 
+
+/**
 *   Second constructor 
 */
 template <class item_type>

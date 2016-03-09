@@ -12,21 +12,23 @@ namespace archive {
 /**
 *   Archive compatibility with vectors
 */
-template <class type, class vector_type = std::vector<type> >
-class VectorArchive : public Archive<type> {
+template <class vector_type>
+class VectorArchive : public Archive<std::vector<vector_type> > {
 private:
     /** some typedef to write less */
-    typedef Archive<type> io_archive;
+    typedef Archive<std::vector<vector_type> > io_archive;
 
 public:
     /** default constructor */
     VectorArchive();
+    /** copy operator */
+    VectorArchive(const VectorArchive&);
 
     /** << operator overloading */
-    VectorArchive& operator<<(const vector_type& item);  
+    VectorArchive& operator<<(const std::vector<vector_type>& item);  
 
     /** Overloading operator >>  */
-    VectorArchive& operator>>(vector_type& item);
+    VectorArchive& operator>>(std::vector<vector_type>& item);
 
 };
 

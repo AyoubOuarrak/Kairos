@@ -45,6 +45,14 @@ IArchive<item_type>::IArchive() : BasicArchive<item_type>() {
 }
 
 /**
+*   copy operator
+*/
+template <class item_type>
+IArchive<item_type>::IArchive(const IArchive& i_archive) {
+
+}
+
+/**
 *   Second construct of the input archive, it set the stream from parameter
 *   param stream input stream
 */
@@ -150,6 +158,14 @@ template <class item_type>
 OArchive<item_type>::OArchive() : BasicArchive<item_type>() {
 
 }
+
+/**
+*   copy operator 
+*/
+template <class item_type>
+OArchive<item_type>::OArchive(const OArchive& o_archive) {
+    
+} 
 
 /**
 *   Second construct of the output archive, it set the output stream from parameter

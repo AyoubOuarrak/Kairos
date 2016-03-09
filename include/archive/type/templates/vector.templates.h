@@ -1,17 +1,25 @@
 /**
 *   Default constructor
 */
-template <class type, class vector_type = std::vector<type> >
-VectorArchive<vector_type>::VectorArchive() : Archive() {
+template <class vector_type>
+VectorArchive<vector_type>::VectorArchive() : Archive<std::vector<vector_type> >() {
 
+}
+
+/**
+*   copy operator
+*/
+template <class vector_type>
+VectorArchive<vector_type>::VectorArchive(const VectorArchive& varchive) {
+    
 }
 
 /**
 *   << operator overloading
 */
-template <class type, class vector_type = std::vector<type> >
+template <class vector_type>
 VectorArchive<vector_type>& 
-VectorArchive<vector_type>::operator<<(const vector_type& item) {
+VectorArchive<vector_type>::operator<<(const std::vector<vector_type>& item) {
     if(io_archive::isInOpen())
         io_archive::closeInStream();
 
@@ -28,18 +36,18 @@ VectorArchive<vector_type>::operator<<(const vector_type& item) {
 /**
 *   >> operator overloading
 */
-template <class type, class vector_type = std::vector<type> >
+template <class vector_type>
 VectorArchive<vector_type>& 
-VectorArchive<vector_type>::operator>>(vector_type& item) { 
+VectorArchive<vector_type>::operator>>(std::vector<vector_type>& item) { 
     if(io_archive::isOutOpen())
         io_archive::closeOutStream();
 
     if(!io_archive::isInOpen())
         io_archive::openInStream(std::ios::in);
 
-    type el;
-    for(int i = 0; io_archive::inStream >> el; ++i) 
-        item[i] = el;
+    vector_type el;
+    for(; io_archive::inStream >> el; ) 
+        item.push_back(el);
         
     return *this;
 }

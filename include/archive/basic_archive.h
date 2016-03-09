@@ -66,6 +66,8 @@ protected:
 public:
     /** default constructor */
     IArchive();
+    /** copy operator */
+    IArchive(const IArchive&);
     /** second constructor */
     explicit IArchive(std::ifstream steam);
     /** default distructor */
@@ -88,6 +90,8 @@ protected:
 public:
     /** default constructor */
     OArchive();
+    /** copy operator */
+    OArchive(const OArchive&);
     /** second constructor */
     explicit OArchive(std::ofstream stream);
     /** default distructor */
