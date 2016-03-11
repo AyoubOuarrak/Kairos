@@ -14,6 +14,12 @@ VectorArchive<vector_type>::VectorArchive(const VectorArchive& varchive) {
     
 }
 
+template <class vector_type>
+Archive<std::vector<vector_type> > 
+VectorArchive<vector_type>::operator=(const VectorArchive& varchive) {
+
+}
+
 /**
 *   << operator overloading
 */

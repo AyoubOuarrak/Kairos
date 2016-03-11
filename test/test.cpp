@@ -76,15 +76,15 @@ using namespace archive;
 int main() {
     std::vector<int> array;
     for(int i = 0; i < 10; ++i)
-        array.push_back(i*2);
+        array.push_back(i*4);
 
-    VectorArchive<int> arr;
+    Archive<std::vector<int> >* arr = new VectorArchive<int>();
 
-    arr << array;
+    *arr << array;
 
     std::vector<int> array1;
 
-    arr >> array1;
+    *arr >> array1;
 
     for(int i = 0; i < array1.size(); ++i)
         std::cout << array1[i] << std::endl;
