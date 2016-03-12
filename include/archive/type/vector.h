@@ -24,6 +24,7 @@ public:
     /** copy operator */
     VectorArchive(const VectorArchive&);
 
+    /** assignment operator overloading */
     Archive<std::vector<vector_type> > operator=(const VectorArchive&);
 
     /** << operator overloading */

@@ -14,6 +14,9 @@ VectorArchive<vector_type>::VectorArchive(const VectorArchive& varchive) {
     
 }
 
+/**
+*   Assignment operator overloading
+*/
 template <class vector_type>
 Archive<std::vector<vector_type> > 
 VectorArchive<vector_type>::operator=(const VectorArchive& varchive) {
