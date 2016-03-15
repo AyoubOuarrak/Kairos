@@ -6,7 +6,7 @@
 using namespace kairos;
 using namespace archive;
 
-int main() {
+int test_archive() {
     /** insert data */
     std::vector<int> v;
     for(int i = 0; i < 10; ++i)
@@ -25,7 +25,7 @@ int main() {
     *archive >> v2;
 
     /** print vector */
-    for(int i = 0; i < array1.size(); ++i)
+    for(int i = 0; i < v2.size(); ++i)
         std::cout << v2[i] << std::endl;
 }
 
