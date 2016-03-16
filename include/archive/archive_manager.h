@@ -18,15 +18,11 @@ private:
     static std::map<std::string, ArchiveFactory*> archives;
 
 public:
-    /**
-    *   register a new archive
-    */
+    /** register a new archive */
     static void registerType(const std::string& name, ArchiveFactory* archive);
 
 protected:
-    /**
-    *   get a specific archive
-    */
+    /** get a specific archive */
     static Archive* get(const std::string& name);
 };
 

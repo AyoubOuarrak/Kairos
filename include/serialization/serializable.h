@@ -4,6 +4,7 @@
 #include "../archive/archive_manager.h"
 #include "../archive/type/vector.h"
 #include "../archive/archive.h"
+#include "serialization.h"
 
 using namespace kairos::archive;
 
@@ -13,10 +14,10 @@ namespace serialization {
 /**
 *   Abstract class Serializable
 */
-class Serializable : public ArchiveManager {
+class Serializable : public Serialization, public ArchiveManager {
 private:
 
-protected:
+public:
     /** default constructor */
     Serializable();
     /** disable copy constructor */
