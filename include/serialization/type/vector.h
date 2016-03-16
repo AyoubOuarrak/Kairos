@@ -25,7 +25,7 @@ public:
     VectorArchive(const VectorArchive&);
 
     /** assignment operator overloading */
-    Archive<std::vector<vector_type> > operator=(const VectorArchive&);
+    Archive<std::vector<vector_type>> operator=(const VectorArchive&);
 
     /** << operator overloading */
     VectorArchive& operator<<(const std::vector<vector_type>& item);  
