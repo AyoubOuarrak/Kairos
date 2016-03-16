@@ -10,9 +10,7 @@ namespace archive {
 /**
 *   Basic Abstract Archive class
 */
-template <class item_type>
 class BasicArchive {
-
 protected:
     /** archive name*/
     std::string archiveName;
@@ -49,20 +47,18 @@ public:
     void closeOutStream();
 
     /** pure overloading of the operator << */
-    virtual BasicArchive& operator<<(const item_type& item) = 0;
+    template <class item_type>
+    virtual void add(const item_type& item) = 0;
+
     /** pure overloading of the operator >> */
-    virtual BasicArchive& operator>>(item_type& item) = 0;
+    template <class item_type>
+    virtual item_type get() = 0;
 };
 
 /**
 *   Input Archive class, extend Basic archive
 */
-template <class item_type>
-class IArchive : public virtual BasicArchive<item_type> {
-
-protected:
-
-
+class IArchive : public virtual BasicArchive {
 public:
     /** default constructor */
     IArchive();
@@ -74,19 +70,15 @@ public:
     virtual ~IArchive();
 
     /** pure overloading of the operator >> */
-    virtual IArchive<item_type>& operator>>(item_type& item) = 0;
+    template <class item_type>
+    virtual item_type get() = 0;
 };
 
 
 /**
 *   Ouput Archive class, extend Basic archive 
 */
-template <class item_type>
-class OArchive : public virtual BasicArchive<item_type> {
-
-protected:
-    
-
+class OArchive : public virtual BasicArchive {
 public:
     /** default constructor */
     OArchive();
@@ -98,7 +90,8 @@ public:
     virtual ~OArchive();
 
     /** pure overloading of the operator << */
-    virtual OArchive<item_type>& operator<<(const item_type& item) = 0;
+    template <class item_type>
+    virtual void add(const item_type& item) = 0;
 };
 
 #include "templates/basic_archive.templates.h"
