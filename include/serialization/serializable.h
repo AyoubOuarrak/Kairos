@@ -17,24 +17,17 @@ private:
 
 protected:
     /** default constructor */
-    Serializable() { };
+    Serializable();
     /** disable copy constructor */
     Serializable(const Serializable &) = delete;
     /** disable assignment operator */
     Serializable& operator=(const Serializable&) = delete;
 
     /** default distructor */
-    virtual ~Serializable() { };
+    virtual ~Serializable();
 
     /** virtual pure method to serialize native types */
-    template <typename T>
-    void serialize(Archive<T>&); 
-
-    /** virtual pure method to serialize vector types */
-    template <typename T>
-    void serialize(VectorArchive<T>&);
-
-    // .... other serialize function for the other types 
+    virtual void serialize() = 0;
 };
 
 
