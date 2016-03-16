@@ -19,6 +19,10 @@ include_directories(include/archive/templates)
 include_directories(include/archive/type)
 include_directories(include/serialization)
   
-file(GLOB SOURCES "test/*.cpp")
- 
+file(GLOB SOURCES 
+	"test/*.cpp"
+	"src/archive/*.cpp"
+	"src/serialization/*.cpp"
+	"src/serialization/type/*.cpp")
+
 add_executable(bin/test ${SOURCES})
