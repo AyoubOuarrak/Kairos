@@ -1,62 +1,35 @@
 /**
-*   Default constructor
-*/
-template <class vector_type>
-VectorArchive<vector_type>::VectorArchive() : Archive<std::vector<vector_type> >() {
-
-}
-
-/**
-*   copy operator
-*/
-template <class vector_type>
-VectorArchive<vector_type>::VectorArchive(const VectorArchive& varchive) {
-    
-}
-
-/**
-*   Assignment operator overloading
-*/
-template <class vector_type>
-Archive<std::vector<vector_type> > 
-VectorArchive<vector_type>::operator=(const VectorArchive& varchive) {
-
-}
-
-/**
 *   << operator overloading
 */
 template <class vector_type>
-VectorArchive<vector_type>& 
-VectorArchive<vector_type>::operator<<(const std::vector<vector_type>& item) {
-    if(io_archive::isInOpen())
-        io_archive::closeInStream();
+void VectorSD::add(const std::vector<vector_type>& item) {
+    if(Archive::isInOpen())
+        Archive::closeInStream();
 
-    if(!io_archive::isOutOpen())
-        io_archive::openOutStream(std::ios::out | std::ios::app);
+    if(!Archive::isOutOpen())
+        Archive::openOutStream(std::ios::out | std::ios::app);
 
     for(int i = 0; i < item.size(); ++i) {
-        io_archive::outStream << item[i];
-        io_archive::outStream << " ";
+        Archive::outStream << item[i];
+        Archive::outStream << " ";
     }
-    return *this;
 } 
 
 /**
 *   >> operator overloading
 */
 template <class vector_type>
-VectorArchive<vector_type>& 
-VectorArchive<vector_type>::operator>>(std::vector<vector_type>& item) { 
-    if(io_archive::isOutOpen())
-        io_archive::closeOutStream();
+std::vector<vector_type> VectorSD::get() { 
+    if(Archive::isOutOpen())
+        Archive::closeOutStream();
 
-    if(!io_archive::isInOpen())
-        io_archive::openInStream(std::ios::in);
+    if(!Archive::isInOpen())
+        Archive::openInStream(std::ios::in);
 
+    std::vector<vector_type> item;
     vector_type el;
-    for(; io_archive::inStream >> el; ) 
+
+    for(; Archive::inStream >> el; ) 
         item.push_back(el);
         
-    return *this;
 }

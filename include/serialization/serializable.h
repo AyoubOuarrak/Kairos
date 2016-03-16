@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SERIALIZATION_SERIALIZABLE_H
 #define INCLUDE_SERIALIZATION_SERIALIZABLE_H
 
+#include "../archive/archive_manager.h"
 #include "../archive/type/vector.h"
 #include "../archive/archive.h"
 
@@ -12,7 +13,7 @@ namespace serialization {
 /**
 *   Abstract class Serializable
 */
-class Serializable {
+class Serializable : public ArchiveManager {
 private:
 
 protected:

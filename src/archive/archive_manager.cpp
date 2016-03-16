@@ -5,7 +5,7 @@
 *   Macro to register new archives
 */
 #define REGISTER_ARCHIVE(klass)                        \
-class klass##Factory : public ArchiveFactory {  \
+class klass##Factory : public ArchiveFactory {         \
 public:                                                \
     klass##Factory() {                                 \
         ArchiveManager::registerType(#klass, this);    \
