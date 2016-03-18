@@ -8,7 +8,7 @@ namespace kairos {
 namespace archive {
 
 /**
-*   Basic Abstract Archive class
+*   Basic Archive class
 */
 class BasicArchive {
 protected:
@@ -25,7 +25,8 @@ public:
     /** second constructor */
     explicit BasicArchive(std::string archive_name);
     /** default distructor */
-    virtual ~BasicArchive();
+    virtual ~BasicArchive() = default;
+
 
     /** return the name of the archive */
     std::string name() const;
@@ -45,58 +46,9 @@ public:
     /** close the input stream */
     void closeInStream();
     void closeOutStream();
-
-    /** pure overloading of the operator << */
-    template <class item_type>
-    virtual void add(const item_type& item) = 0;
-
-    /** pure overloading of the operator >> */
-    template <class item_type>
-    virtual item_type get() = 0;
 };
 
-/**
-*   Input Archive class, extend Basic archive
-*/
-class IArchive : public virtual BasicArchive {
-public:
-    /** default constructor */
-    IArchive();
-    /** copy operator */
-    IArchive(const IArchive&);
-    /** second constructor */
-    explicit IArchive(std::ifstream steam);
-    /** default distructor */
-    virtual ~IArchive();
-
-    /** pure overloading of the operator >> */
-    template <class item_type>
-    virtual item_type get() = 0;
-};
-
-
-/**
-*   Ouput Archive class, extend Basic archive 
-*/
-class OArchive : public virtual BasicArchive {
-public:
-    /** default constructor */
-    OArchive();
-    /** copy operator */
-    OArchive(const OArchive&);
-    /** second constructor */
-    explicit OArchive(std::ofstream stream);
-    /** default distructor */
-    virtual ~OArchive();
-
-    /** pure overloading of the operator << */
-    template <class item_type>
-    virtual void add(const item_type& item) = 0;
-};
-
-#include "templates/basic_archive.templates.h"
 }
 }
 
 #endif 
-
