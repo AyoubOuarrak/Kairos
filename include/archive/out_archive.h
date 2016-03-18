@@ -30,6 +30,9 @@ public:
     virtual void put(long long src) = 0;
     virtual void put(double src) = 0;
     virtual void put(char src) = 0;
+
+    /** for binary serialization of sz bytes */
+    virtual void put(void* p, std::size_t sz) = 0;
 };
 
 /**

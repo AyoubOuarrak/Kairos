@@ -1,7 +1,9 @@
 #ifndef ARCHIVE_ARCHIVE_H
 #define ARCHIVE_ARCHIVE_H
 
-#include "basic_archive.h"
+#include "out_archive.h"
+#include "in_archive.h"
+
 #include <string>
 #include <fstream>
 
@@ -11,11 +13,10 @@ namespace archive {
 /**
 *   Archive class, extend input archive and output archive
 */
-class Archive : public OArchive, public IArchive {
-
+class Archive : public OutArchive, public InArchive {
 private:
-    typedef OArchive output_archive;
-    typedef IArchive input_archive;
+    typedef OutArchive output_archive;
+    typedef InArchive input_archive;
     typedef BasicArchive io_archive;
     
 protected:
@@ -30,18 +31,11 @@ public:
     /** second constructor */
     Archive(std::string path);
     /** default distructor */
-    virtual ~Archive();
+    virtual ~Archive() = default;
 
-    /** overloading of the << operator */
-    template <clas item_type>
-    void add(const item_type& item);
-
-    /** overloading of the << operator */
-    template <class item_type>;
-    item_type get() const;
 };
 
-#include "templates/archive.templates.h"
+
 }
 }
 

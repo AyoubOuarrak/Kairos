@@ -30,6 +30,9 @@ public:
     virtual void get(long long& dest) = 0;
     virtual void get(double& dest) = 0;
     virtual void get(char& dest) = 0;
+
+    /** for binary serialization of sz bytes */
+    virtual void get(void* p, std::size_t sz) = 0;
 };
 
 /**
