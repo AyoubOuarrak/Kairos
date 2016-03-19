@@ -1,10 +1,9 @@
-#ifndef INCLUDE_SERIALIZATION_TYPE_VARCHIVE_H
-#define INCLUDE_SERIALIZATION_TYPE_VARCHIVE_H
+#ifndef INCLUDE_SERIALIZATION_TYPE_ARCHIVE_H
+#define INCLUDE_SERIALIZATION_TYPE_ARCHIVE_H
 
-#include "../../archive/archive_manager.h"
+#include "../../archive/types/text.h"
+#include "../../archive/archive.h"
 #include <vector>
-#include <string>
-#include <fstream>
 
 using namespace kairos::archive;
 
@@ -12,31 +11,28 @@ namespace kairos {
 namespace serialization {
 
 /**
-*   Archive compatibility with vectors
+*   Serialization of vectors
 */
-class VectorSD : public ArchiveManager {
+template <class vector_type, class archive_type = TextArchive>
+class Vector : public Archive {
 private:
 
 public:
     /** default constructor */
-    VectorSD();
+    Vector();
     /** copy operator */
-    VectorSD(const VectorSD&);
+    Vector(const Vector&);
 
     /** assignment operator overloading */
-    ArchiveSD operator=(const VectorSD&);
+    Archive operator=(const Vector&);
 
-    /** << operator overloading */
-    template <class vector_type>
-    void add(const std::vector<vector_type>& vector);  
+    /** save vector in the archive */
+    virtual void put(const std::vector<vector_type>& src);
 
-    /** Overloading operator >>  */
-    template <class vector_type>
-    std::vector<vector_type> get();
-
+    /** get the vector from archive */
+    virtual void get(std::vector<vector_type>& dest);
 };
 
-#include "templates/vector.templates.h"
 }
 }
 
