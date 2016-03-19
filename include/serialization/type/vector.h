@@ -20,9 +20,13 @@ private:
 public:
     /** default constructor */
     Vector();
+
     /** copy operator */
     Vector(const Vector&);
 
+    /** default dtor */
+    virtual ~Vector();
+    
     /** assignment operator overloading */
     Archive operator=(const Vector&);
 
