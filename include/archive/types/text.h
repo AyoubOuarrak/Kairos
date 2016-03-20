@@ -26,6 +26,7 @@ public:
     virtual void put(long long src);
     virtual void put(double src);
     virtual void put(char src);
+    virtual void put(bool src);
 
     /** override for get functions */
     virtual void get(int& dest);
@@ -33,6 +34,7 @@ public:
     virtual void get(long long& dest);
     virtual void get(double& dest);
     virtual void get(char& dest);
+    virtual void get(bool& dest);
 };
 
 }

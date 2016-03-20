@@ -31,10 +31,10 @@ public:
     Archive operator=(const Vector&);
 
     /** save vector in the archive */
-    virtual void put(const std::vector<vector_type>& src);
+    void put(const std::vector<vector_type>& src);
 
     /** get the vector from archive */
-    virtual void get(std::vector<vector_type>& dest);
+    void get(std::vector<vector_type>& dest);
 };
 
 }
