@@ -13,25 +13,26 @@ private:
     int age;
 
 public:
-    User() { };
-    
-    ~User() { };
+    User() {
+        registerType(this);
+    };
     
     User(std::string nick_, int id_, int age_)  {
         nick = nick_;
         id = id_;
         age = age_;
+        registerType(this);
     }
 
+    ~User() {};
+
     /** Serializable method */
-    void serialize() {
+    void serialize(Archive& arr) {
         /** get the type of archive from the archive manager */
-        Archive* archive = ArchiveManager.get("NativeSD");
+        archive = new Archive();
 
         /** add data to the archive */
-        archive.add<int>(id);
-        archive.add<int>(age);
-        archive.add<std::string>(nick);
+        archive << id << age << nick;
     }
 };
 
