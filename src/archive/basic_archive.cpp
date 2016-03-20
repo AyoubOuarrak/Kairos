@@ -1,5 +1,8 @@
 #include "../../include/archive/basic_archive.h"
 
+namespace kairos {
+namespace archive {
+
 /**
 *   Default construct of the basic archive, it set the name of the archive
 */
@@ -33,34 +36,6 @@ std::string BasicArchive::name() const {
     return archiveName;
 }
 
-/**
-*   Default construct of the input archive, it open the input stream
-*/
-IArchive::IArchive() : BasicArchive() {
-    
-}
-
-/**
-*   copy operator
-*/
-IArchive::IArchive(const IArchive& i_archive) {
-
-}
-
-/**
-*   Second construct of the input archive, it set the stream from parameter
-*   param stream input stream
-*/
-IArchive::IArchive(std::ifstream stream) {
-    BasicArchive::inStream = stream;
-}
-
-/**
-*   Default distruct of the input archive
-*/ 
-IArchive::~IArchive() {
-    BasicArchive::inStream.close();
-}
 
 /**
 *   Return if the input stream is open
@@ -108,7 +83,7 @@ void BasicArchive::openOutStream(std::ios_base::openmode mode) {
 *   Open the input stream with a different mode 
 */
 void BasicArchive::openInStream(std::string archive_name, 
-                                               std::ios_base::openmode mode) {
+                                std::ios_base::openmode mode) {
     inStream.open(archive_name, mode);
 }
 
@@ -116,7 +91,7 @@ void BasicArchive::openInStream(std::string archive_name,
 *   Open the output stream with a different mode 
 */
 void BasicArchive::openOutStream(std::string archive_name, 
-                                                std::ios_base::openmode mode) {
+                                 std::ios_base::openmode mode) {
     outStream.open(archive_name, mode);
 }
 
@@ -134,31 +109,5 @@ void BasicArchive::closeOutStream() {
     outStream.close();
 }
 
-/**
-*   Default construct of the output archive, it open the output archive
-*/
-OArchive::OArchive() : BasicArchive() {
-
 }
-
-/**
-*   copy operator 
-*/
-OArchive::OArchive(const OArchive& o_archive) {
-    
-} 
-
-/**
-*   Second construct of the output archive, it set the output stream from parameter
-*   param stream output stream
-*/
-OArchive::OArchive(std::ofstream stream) {
-    BasicArchive::outStream = stream;
-}
-
-/**
-*   Default output archive distructor
-*/ 
-OArchive::~OArchive() {
-    BasicArchive::outStream.close();
 }
