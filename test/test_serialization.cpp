@@ -8,7 +8,6 @@ using namespace serialization;
 
 class User : public Serializable {
 private:
-    std::string nick;
     int id;
     int age;
 
@@ -17,7 +16,7 @@ public:
         registerType(this);
     };
     
-    User(std::string nick_, int id_, int age_)  {
+    User(int id_, int age_)  {
         nick = nick_;
         id = id_;
         age = age_;
@@ -29,15 +28,15 @@ public:
     /** Serializable method */
     void serialize(Archive& arr) {
         /** get the type of archive from the archive manager */
-        archive = new Archive();
+        archive = new BuiltIn();
 
         /** add data to the archive */
-        archive << id << age << nick;
+        archive << id << age;
     }
 };
 
 int main() {
-    User* user = new User("lol", 0, 23);
+    User* user = new User(0, 23);
 }
 
 

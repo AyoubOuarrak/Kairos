@@ -1,4 +1,4 @@
-#include "../include/archive/type/vector.h"
+#include "../include/archive/archive_manager.h"
 #include <iostream>
 #include <vector>
 #include <map>
@@ -13,16 +13,16 @@ int test_archive() {
         v.push_back(i*4);
 
     /** create an archive for vectors */
-    Archive<std::vector<int>>* archive = new VectorArchive<int>();
+    Archive* archive = ArchiveManager.get("VectorSD");
 
     /** serializa the vector */
-    *archive << v;
+    archive->add<int>(v);
 
     /** create an empty vector */
     std::vector<int> v2;
 
     /** restore data into the vectors */
-    *archive >> v2;
+    v2 = archive->get<int>();
 
     /** print vector */
     for(int i = 0; i < v2.size(); ++i)
