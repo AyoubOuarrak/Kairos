@@ -13,7 +13,6 @@ private:
     std::map<uint16_t, std::Serializable*> serializableObjects;
 
 protected:
-    serialization
     /** call serialize method for a specific object */
     static void createCheckpoint(Serializable&) const;
 

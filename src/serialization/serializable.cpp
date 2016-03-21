@@ -1,5 +1,8 @@
 #include "../../include/serialization/serializable.h"
 
+namespace kairos {
+namespace serialization {
+
 /**
 *   Default ctor
 */
@@ -14,3 +17,5 @@ virtual Serializable::~Serializable() {
 
 }
 
+}
+}

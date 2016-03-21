@@ -38,6 +38,8 @@ public:
 
 int main() {
     User* user = new User(0, 23);
+
+    Serialization::crateCheckpoint(user);
 }
 
 
