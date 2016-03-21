@@ -2,6 +2,7 @@
 #define INCLUDE_SERIALIZATION_SERIALIZATION_H
 
 #include "serializable.h"
+#include <cstdint>
 
 namespace kairos {
 namespace serialization {
@@ -9,15 +10,18 @@ namespace serialization {
 class Serialization {
 private:
     /** list of serializable objects */
-    std::list<Serializable*> serializableObjects;
-    
+    std::map<uint16_t, std::Serializable*> serializableObjects;
 
 protected:
-    /** iterate through the list and call serialize method */
-    void createCheckpoint() const;
+    serialization
+    /** call serialize method for a specific object */
+    static void createCheckpoint(Serializable&) const;
+
+    /** serialize all object in the list */
+    void checkpoint();
 
     /** add obj to the list of object that need to be serialized */
-    void registerType(const Serializable& obj);
+    uint16_t registerType(const Serializable& obj);
 };
 
 }

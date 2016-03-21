@@ -10,17 +10,18 @@ class User : public Serializable {
 private:
     int id;
     int age;
+    uint16_t type_id;   // id returned by the Serializable class 
 
 public:
     User() {
-        registerType(this);
+        type_id = registerType(this);
     };
     
     User(int id_, int age_)  {
         nick = nick_;
         id = id_;
         age = age_;
-        registerType(this);
+        type_id = registerType(this);
     }
 
     ~User() {};
