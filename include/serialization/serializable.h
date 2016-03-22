@@ -11,7 +11,7 @@ namespace serialization {
 /**
 *   Abstract class Serializable
 */
-class Serializable : public Serialization {
+class Serializable {
 private:
 
 public:
@@ -26,7 +26,7 @@ public:
     virtual ~Serializable();
 
     /** virtual pure method to serialize native types */
-    virtual void serialize(Archive&) = 0;
+    virtual void serialize() = 0;
 };
 
 

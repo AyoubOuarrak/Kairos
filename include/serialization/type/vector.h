@@ -37,6 +37,7 @@ public:
     void get(std::vector<vector_type>& dest);
 };
 
+#include "templates/vector.templates.h"
 }
 }
 

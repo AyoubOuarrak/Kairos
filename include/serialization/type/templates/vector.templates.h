@@ -1,7 +1,3 @@
-#include "../../../include/serialization/type/vector.h"
-
-namespace kairos {
-namespace serialization {
 
 /**
 *   Default constructor
@@ -52,5 +48,3 @@ void Vector::get(std::vector<vector_type>& dest) {
     }
 }
 
-}
-}

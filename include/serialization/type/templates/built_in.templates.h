@@ -1,20 +1,17 @@
-#include "../../../include/serialization/type/built_in.h"
-
-namespace kairos {
-namespace serialization {
 
 /**
 *   Default constructor
 */
-template <class archive_type = TextArchive>
 BuiltIn::BuiltIn() {
-
+    archive = new TextArchive();
 }
 
+BuiltIn::BuiltIn(Archive* _archive) {
+    archive = _archive;
+}
 /**
 *   Copy constructor
 */
-template <class archive_type = TextArchive>
 BuiltIn::BuiltIn(const BuiltIn& built_in) {
 
 }
@@ -22,7 +19,6 @@ BuiltIn::BuiltIn(const BuiltIn& built_in) {
 /**
 *   Default dtor
 */
-template <class archive_type = TextArchive>
 BuiltIn::~BuiltIn() {
 
 }
@@ -30,26 +26,23 @@ BuiltIn::~BuiltIn() {
 /**
 *   Assignment operator
 */
-template <class archive_type = TextArchive>
-Archive BuiltIn::operator=() {
+Archive BuiltIn::operator=(const BuiltIn&) {
 
 }
 
 /**
 *   Save a built-in type in the vector
 */
-template <class T, class archive_type = TextArchive>
+template <class T>
 void BuiltIn::put(const T& src) {
-    archive_type << src;
+    archive->put(src);
 }
 
 /**
 *   Get a built--in type from the vector
 */
-template <class T, class archive_type = TextArchive>
+template <class T>
 void BuiltIn::get(T& src) {
-    archive_type >> src;
+    archive->get(src);
 }
 
-}
-}
