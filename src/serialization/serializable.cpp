@@ -13,7 +13,7 @@ Serializable::Serializable() {
 /** 
 *   Default distructor 
 */
-virtual Serializable::~Serializable() {
+Serializable::~Serializable() {
 
 }
 

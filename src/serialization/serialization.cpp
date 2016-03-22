@@ -17,17 +17,17 @@ uint16_t Serialization::registerType(Serializable* obj) {
 /**
 *   Serialize a specific object
 */
-void Serialization::createCheckpoint(Serializable& ser) {
-    ser.serialize();
+void Serialization::createCheckpoint(Serializable* ser) {
+    ser->serialize();
 }
 
 /**
 *   Serialize all object that are serializable
 */
 void Serialization::checkpoint() {
-    std::map<uint16_t, std::Serializable*>::const_iterator objects;
-    for(auto it = objects.begin(); it != objects.end(); ++it) 
-        it->serialize();
+    std::map<uint16_t, Serializable*>::const_iterator objs;
+    for(auto it = serializableObjects.begin(); it != serializableObjects.end(); ++it) 
+        (it->second)->serialize();
 }
 
 }
