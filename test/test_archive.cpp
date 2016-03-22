@@ -1,34 +1,31 @@
-#include "../include/archive/archive_manager.h"
+/*
 #include <iostream>
 #include <vector>
 #include <map>
 
-using namespace kairos;
-using namespace archive;
-
 int test_archive() {
     /** insert data */
-    std::vector<int> v;
+  /*  std::vector<int> v;
     for(int i = 0; i < 10; ++i)
         v.push_back(i*4);
 
     /** create an archive for vectors */
-    Archive* archive = ArchiveManager.get("VectorSD");
+  /*  Archive* archive = ArchiveManager.get("VectorSD");
 
     /** serializa the vector */
-    archive->add<int>(v);
+  /*  archive->add<int>(v);
 
     /** create an empty vector */
-    std::vector<int> v2;
+  /*  std::vector<int> v2;
 
     /** restore data into the vectors */
-    v2 = archive->get<int>();
+  /*  v2 = archive->get<int>();
 
     /** print vector */
-    for(int i = 0; i < v2.size(); ++i)
+  /*  for(int i = 0; i < v2.size(); ++i)
         std::cout << v2[i] << std::endl;
 }
 
 
 
-
+*/

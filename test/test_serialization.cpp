@@ -1,4 +1,6 @@
 #include "../include/serialization/serializable.h"
+#include "../include/serialization/serialization.h"
+#include "../include/serialization/type/built_in.h"
 #include <iostream>
 #include <string>
 
@@ -6,7 +8,7 @@ using namespace kairos;
 using namespace serialization;
 
 
-class User : public Serializable {
+class User : public Serializable, public Serialization {
 private:
     int id;
     int age;
@@ -18,7 +20,6 @@ public:
     };
     
     User(int id_, int age_)  {
-        nick = nick_;
         id = id_;
         age = age_;
         type_id = registerType(this);
@@ -27,19 +28,19 @@ public:
     ~User() {};
 
     /** Serializable method */
-    void serialize(Archive& arr) {
+    void serialize() {
         /** get the type of archive from the archive manager */
-        archive = new BuiltIn();
+        BuiltIn native;
 
         /** add data to the archive */
-        archive << id << age;
+        native << id << age;
     }
 };
 
 int main() {
     User* user = new User(0, 23);
 
-    Serialization::crateCheckpoint(user);
+    Serialization::createCheckpoint(user);
 }
 
 
