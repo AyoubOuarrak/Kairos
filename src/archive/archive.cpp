@@ -1,4 +1,8 @@
 #include "../../include/archive/archive.h"
+
+namespace kairos {
+namespace archive {
+
 /**
 *   Default constructor 
 */
@@ -20,10 +24,7 @@ Archive::Archive(std::string path) : input_archive(), output_archive() {
     archivePath = path;
 }
 
-/**
-*   Default distructor 
-*/
-Archive::~Archive() {
 
+}
 }
 
