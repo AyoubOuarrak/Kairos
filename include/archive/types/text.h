@@ -17,6 +17,9 @@ public:
     /** copy constructor */
     TextArchive(const TextArchive&);
 
+    /** assignment operator */
+    Archive operator=(const TextArchive&);
+    
     /** default dtor */
     virtual ~TextArchive();
 

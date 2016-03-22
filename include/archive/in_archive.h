@@ -1,6 +1,7 @@
 #ifndef ARCHIVE_INPUT_ARCHIVE_H
 #define ARCHIVE_INPUT_ARCHIVE_H
 
+#include "basic_archive.h"
 #include <string>
 #include <fstream>
 
@@ -16,10 +17,7 @@ public:
     InArchive();
 
     /** copy operator */
-    InArchive(const IArchive&);
-    
-    /** second constructor */
-    explicit InArchive(std::ifstream steam);
+    InArchive(const InArchive&);
     
     /** default distructor */
     virtual ~InArchive() = default;
@@ -33,7 +31,7 @@ public:
     virtual void get(bool& dest) = 0;
 
     /** for binary serialization of sz bytes */
-    virtual void get(void* p, std::size_t sz) = 0;
+    virtual void get(char* p, std::size_t sz);
 };
 
 /**

@@ -21,8 +21,8 @@ public:
     virtual ~BinaryArchive();
 
     /** override for binary serialization of sz bytes */
-    virtual void get(void* p, std::size_t sz) = 0;
-    virtual void put(void* p, std::size_t sz) = 0;
+    virtual void get(char* p, std::size_t sz) = 0;
+    virtual void put(char* p, std::size_t sz) = 0;
 };
 
 }

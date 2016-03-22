@@ -25,7 +25,7 @@ public:
     /** second constructor */
     explicit BasicArchive(std::string archive_name);
     /** default distructor */
-    virtual ~BasicArchive() = default;
+    virtual ~BasicArchive();
 
 
     /** return the name of the archive */
