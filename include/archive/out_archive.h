@@ -31,7 +31,7 @@ public:
     virtual void put(bool src) = 0;
 
     /** for binary serialization of sz bytes */
-    virtual void put(char* p, std::size_t sz);
+    virtual void put(char* p, std::size_t sz) = 0;
 };
 
 /**

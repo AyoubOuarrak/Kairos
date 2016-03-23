@@ -31,7 +31,7 @@ public:
     virtual void get(bool& dest) = 0;
 
     /** for binary serialization of sz bytes */
-    virtual void get(char* p, std::size_t sz);
+    virtual void get(char* p, std::size_t sz) = 0;
 };
 
 /**
