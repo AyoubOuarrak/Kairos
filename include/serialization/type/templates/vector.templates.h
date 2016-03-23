@@ -8,6 +8,14 @@ Vector::Vector() : Archive() {
 }
 
 /**
+*   Default dtor
+*/
+template <class vector_type, class archive_type = TextArchive>
+Vector::~Vector() : Archive() {
+
+}
+
+/**
 *   copy operator
 */
 template <class vector_type, class archive_type = TextArchive>

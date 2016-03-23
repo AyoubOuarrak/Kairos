@@ -12,22 +12,21 @@ namespace serialization {
 */
 class BuiltIn {
 private:
-    Archive* archive;
+    archive::Archive* archive;
+
 public:
     /** default construtor */
     BuiltIn();
 
     /** default construtor */
-    BuiltIn(Archive*);
+    BuiltIn(archive::Archive*);
 
     /** copy constructor */
     BuiltIn(const BuiltIn&);
 
     /** default dtor */
-    virtual ~BuiltIn();
+    ~BuiltIn();
 
-    /** assignment operator */
-    Archive operator=(const BuiltIn&);
 
     /** save vector in the archive */
     template <class T>
@@ -36,17 +35,26 @@ public:
     /** get the vector from archive */
     template <class T>
     void get(T& dest);
-
-    /** << overloding operator */
-    template <class T>
-    BuiltIn& operator<<(const T& item);
-
-    /** >> overloding operator */
-    template <class T>
-    BuiltIn& operator>>(T& item);
 };
 
 #include "templates/built_in.templates.h"
+
+/** 
+*   << overloding operator 
+*/
+template <class T>
+BuiltIn& operator<<(BuiltIn& out, const T& item) {
+    out.put(item);
+}
+
+/** 
+*   >> overloding operator 
+*/
+template <class T>
+BuiltIn& operator>>(const BuiltIn& in, T& item) {
+    in.get(item);
+}
+
 }
 }
 
