@@ -12,26 +12,34 @@ namespace exception {
 */
 class Exception : public std::exception {
 private:
+    /** exception type */
+    std::string exp_type;
+    
     /** exception message */
-    std::string exp;
+    std::string exp_msg;
+
+    /** string containing additional info about exception */
+    std::string exp_info;
 
 public:
     /** default constructor without message is not allowed */
     Exception() = delete;
 
     /** assignment operator deleted */
+    Exception operator=(const Exception&) = delete;
 
     /** constructor with char* message */
-    explicit Exception(char* message);
+    explicit Exception(char* message, char* info = "");
 
     /** constructor with std string message */
-    explicit Exception(std::string message);
+    explicit Exception(std::string message, std::string info = "");
 
     /** default distructor */
-    virtual ~Exception();
+    virtual ~Exception() = default;
 
     /** return the exception message */
     virtual const char* what() const throw() = 0;
+    virtual const char* info() const throw() = 0;
 };
 
 }
