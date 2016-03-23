@@ -1,5 +1,5 @@
 #include "../../include/archive/types/text.h"
-
+#include <cstdlib>
 namespace kairos {
 namespace archive {
 
@@ -7,7 +7,7 @@ namespace archive {
 *   Default construct of the text archive
 */
 TextArchive::TextArchive() : Archive() {
-    
+    std::rename("archive", "archive.text");
 }
 
 /**

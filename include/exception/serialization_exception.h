@@ -25,7 +25,7 @@ public:
     explicit SerializationException(std::string message, std::string info = "");
 
     /** default distructor */
-    virtual ~SerializationException();
+    virtual ~SerializationException() = default;
 
     /** return the exception message */
     virtual const char* what() const throw();

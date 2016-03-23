@@ -9,6 +9,7 @@ namespace archive {
 BinaryArchive::BinaryArchive() : Archive() {
     openInStream(std::ios::in | std::ios::binary);
     openOutStream(std::ios::out | std::ios::binary);
+    std::rename("archive", "archive.binary");
 }
 
 /**

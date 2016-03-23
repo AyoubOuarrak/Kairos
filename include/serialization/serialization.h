@@ -17,9 +17,15 @@ protected:
     /** add obj to the list of object that need to be serialized */
     uint16_t registerType(Serializable*);
 
+    /** get the serializable object from the id */
+    Serializable* getObject(uint16_t id);
+
 public:
     /** call serialize method for a specific object */
     static void createCheckpoint(Serializable*);
+
+    /** load the status of a object */
+    Serializable* loadCheckpoint();
 
     /** serialize all object in the list */
     void checkpoint();

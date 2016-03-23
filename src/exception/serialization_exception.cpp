@@ -15,7 +15,7 @@ SerializationException::SerializationException(char* message, char* info)
 /** 
 *   Constructor with std string message 
 */
-SerializationException::SerializationException(std::string message, std::string) 
+SerializationException::SerializationException(std::string message, std::string info) 
     : Exception(message, info) {
     exp_type = "serialization"; 
 }
