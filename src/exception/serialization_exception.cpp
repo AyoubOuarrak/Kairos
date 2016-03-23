@@ -7,7 +7,8 @@ namespace exception {
 *   Constructor with char* message 
 */
 SerializationException::SerializationException(char* message, char* info) 
-        : exp_type("serialization"), exp_msg(message), exp_info(info) {
+    : Exception(message, info) {
+    exp_type = "serialization"; 
             
 }
 
@@ -15,14 +16,14 @@ SerializationException::SerializationException(char* message, char* info)
 *   Constructor with std string message 
 */
 SerializationException::SerializationException(std::string message, std::string) 
-        : exp_type("serialization"), exp_msg(message), exp_info(info) {
-    
+    : Exception(message, info) {
+    exp_type = "serialization"; 
 }
 
 /**
 *   Return the exception message
 */
-const char* what() const throw() {
+const char* SerializationException::what() const throw() {
     std::string message = "[" + exp_type + "] : " + exp_msg;
     return message.c_str();
 }
@@ -30,7 +31,7 @@ const char* what() const throw() {
 /**
 *   Return the exception info
 */
-const char* info() const throw() {
+const char* SerializationException::info() const throw() {
     std::string message = "[INFO] : " + exp_info;
     return message.c_str();
 }

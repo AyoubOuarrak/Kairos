@@ -16,6 +16,7 @@ endif()
 
 include_directories(include/archive)
 include_directories(include/archive/type)
+include_directories(include/exception)
 include_directories(include/serialization)
 include_directories(include/serialization/type)
 include_directories(include/serialization/type/templates)
@@ -24,6 +25,8 @@ file(GLOB SOURCES
 	"test/*.cpp"
 	"src/archive/*.cpp"
     "src/archive/types/*.cpp"
-	"src/serialization/*.cpp")
+    "src/exception/*.cpp"
+	"src/serialization/*.cpp"
+    "src/serialization/type/*.cpp")
 
 add_executable(bin/test ${SOURCES})

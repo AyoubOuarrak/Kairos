@@ -11,10 +11,10 @@ namespace exception {
 *   Abstract class for exceptions
 */
 class Exception : public std::exception {
-private:
+protected:
     /** exception type */
     std::string exp_type;
-    
+
     /** exception message */
     std::string exp_msg;
 
@@ -24,9 +24,6 @@ private:
 public:
     /** default constructor without message is not allowed */
     Exception() = delete;
-
-    /** assignment operator deleted */
-    Exception operator=(const Exception&) = delete;
 
     /** constructor with char* message */
     explicit Exception(char* message, char* info = "");

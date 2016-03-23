@@ -35,42 +35,49 @@ TextArchive::~TextArchive() {
 *   Put int in the text archive
 */
 void TextArchive::put(int src) {
-    outStream << src;
+    outStream << src << " " ;
 }
 
 /** 
 *   Put long in the text archive
 */
 void TextArchive::put(long src) {
-    outStream << src;
+    outStream << src << " ";
 }
 
 /** 
 *   Put long long in the text archive
 */
 void TextArchive::put(long long src) {
-    outStream << src;
+    outStream << src << " ";
 }
 
 /** 
 *   Put double in the text archive
 */  
 void TextArchive::put(double src) {
-    outStream << src; 
+    outStream << src << " "; 
 }
  
 /** 
 *   Put char in the text archive
 */     
 void TextArchive::put(char src) {
-    outStream << src; 
+    outStream << src << " "; 
 }
 
 /** 
 *   Put bool in the text archive
 */     
 void TextArchive::put(bool src) {
-    outStream << src; 
+    outStream << src << " "; 
+}
+
+/** 
+*   Empty body for binary serialization
+*/ 
+void TextArchive::put(char* byt, std::size_t sz) {
+    // empty body
 }
 
 /** 
@@ -96,6 +103,7 @@ void TextArchive::get(long long& dest) {
  
 /** 
 *   Get double from the archive 
+
 */   
 void TextArchive::get(double& dest) {
     inStream >> dest;
@@ -113,6 +121,13 @@ void TextArchive::get(bool& dest) {
 */
 void TextArchive::get(char& dest) {
     inStream >> dest;
+}
+
+/** 
+*   Empty body for binary serialization
+*/ 
+void TextArchive::get(char* byt, std::size_t sz) {
+    // empty body
 }
 
 }

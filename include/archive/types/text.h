@@ -31,6 +31,9 @@ public:
     virtual void put(char src);
     virtual void put(bool src);
 
+    /** empty body for binary serialization method */
+    virtual void put(char*, std::size_t);
+
     /** override for get functions */
     virtual void get(int& dest);
     virtual void get(long& dest);
@@ -38,6 +41,9 @@ public:
     virtual void get(double& dest);
     virtual void get(char& dest);
     virtual void get(bool& dest);
+
+    /** empty body for binary serialization method */
+    virtual void get(char*, std::size_t);
 };
 
 }
