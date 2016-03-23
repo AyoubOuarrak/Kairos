@@ -19,6 +19,8 @@ public:
     /** default constructor without message is not allowed */
     Exception() = delete;
 
+    /** assignment operator deleted */
+
     /** constructor with char* message */
     explicit Exception(char* message);
 
