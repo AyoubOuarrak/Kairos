@@ -19,7 +19,7 @@ public:
     SerializationException operator=(const SerializationException&) = delete;
 
     /** constructor with char* message */
-    explicit SerializationException(char* message, char* info = "");
+    explicit SerializationException(char* message, const char* info = "");
 
     /** constructor with std string message */
     explicit SerializationException(std::string message, std::string info = "");
