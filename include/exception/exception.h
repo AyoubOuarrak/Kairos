@@ -26,7 +26,7 @@ public:
     Exception() = delete;
 
     /** constructor with char* message */
-    explicit Exception(char* message, char* info = "");
+    explicit Exception(char* message, const char* info = "");
 
     /** constructor with std string message */
     explicit Exception(std::string message, std::string info = "");
