@@ -19,7 +19,7 @@ public:
     ArchiveException operator=(const ArchiveException&) = delete;
 
     /** constructor with char* message */
-    explicit ArchiveException(char* message, char* info = "");
+    explicit ArchiveException(char* message, const char* info = "");
 
     /** constructor with std string message */
     explicit ArchiveException(std::string message, std::string info = "");
