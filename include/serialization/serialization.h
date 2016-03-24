@@ -8,6 +8,9 @@
 namespace kairos {
 namespace serialization {
 
+/**
+*   Class Serialization, provide methods for creating checkpoints and reload
+*/
 class Serialization {
 private:
     /** list of serializable objects */
@@ -29,7 +32,6 @@ public:
 
     /** serialize all object in the list */
     void checkpoint();
-
 };
 
 }
