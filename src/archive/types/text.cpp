@@ -1,5 +1,5 @@
 #include "../../include/archive/types/text.h"
-#include <cstdlib>
+
 namespace kairos {
 namespace archive {
 
@@ -14,14 +14,13 @@ TextArchive::TextArchive() : Archive() {
 *   Copy operator of text archive
 */
 TextArchive::TextArchive(const TextArchive&) {
-    
+
 }
 
-/** 
-*   Sssignment operator 
+/**
+*   Sssignment operator
 */
 Archive TextArchive::operator=(const TextArchive&) {
-    
 }
 
 /**
@@ -75,8 +74,8 @@ void TextArchive::put(bool src) {
 
 /** 
 *   Empty body for binary serialization
-*/ 
-void TextArchive::put(char* byt, std::size_t sz) {
+*/
+void TextArchive::put(char*, std::size_t) {
     // empty body
 }
 
@@ -126,7 +125,7 @@ void TextArchive::get(char& dest) {
 /** 
 *   Empty body for binary serialization
 */ 
-void TextArchive::get(char* byt, std::size_t sz) {
+void TextArchive::get(char*, std::size_t) {
     // empty body
 }
 
