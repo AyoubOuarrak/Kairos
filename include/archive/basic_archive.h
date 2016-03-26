@@ -11,6 +11,12 @@ namespace archive {
 *   Basic Archive class
 */
 class BasicArchive {
+private:
+    /** in archive mode */
+    std::ios_base::openmode inMode;
+    /** out archive mode */
+    std::ios_base::openmode outMode;
+
 protected:
     /** archive name*/
     std::string archiveName;
@@ -26,7 +32,6 @@ public:
     explicit BasicArchive(std::string archive_name);
     /** default distructor */
     virtual ~BasicArchive();
-
 
     /** return the name of the archive */
     std::string name() const;

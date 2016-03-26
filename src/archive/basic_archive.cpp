@@ -7,8 +7,10 @@ namespace archive {
 *   Default construct of the basic archive, it set the name of the archive
 */
 BasicArchive::BasicArchive() : archiveName("archive") {
-    inStream.open(archiveName, std::ios::in);
-    outStream.open(archiveName, std::ios::out);
+    inMode = std::ios::in;
+    outMode = std::ios::out;
+    inStream.open(archiveName, inMode);
+    outStream.open(archiveName, outMode);
 }
 
 /**
@@ -17,8 +19,11 @@ BasicArchive::BasicArchive() : archiveName("archive") {
 */
 BasicArchive::BasicArchive(std::string _archiveName) {
     archiveName = _archiveName;
-    inStream.open(archiveName, std::ios::in);
-    outStream.open(archiveName, std::ios::out);
+    inMode = std::ios::in;
+    outMode = std::ios::out;
+
+    inStream.open(archiveName, inMode);
+    outStream.open(archiveName, outMode);
 }
 
 /**
@@ -55,44 +60,60 @@ bool BasicArchive::isOutOpen() const {
 *   Open the input stream 
 */
 void BasicArchive::openInStream() {
-    inStream.open(archiveName, std::ios::in);
+    if(!isInOpen())
+        inStream.open(archiveName, std::ios::in);
 }
 
 /** 
 *   Open the output stream 
 */
 void BasicArchive::openOutStream() {
-    outStream.open(archiveName, std::ios::out);
+    if(!isOutOpen())
+        outStream.open(archiveName, std::ios::out);
 }
 
 /** 
 *   Open the input stream with a different mode 
 */
 void BasicArchive::openInStream(std::ios_base::openmode mode) {
-    inStream.open(archiveName, mode);
+    if(isInOpen() && mode != inMode) {
+        closeInStream();
+        inMode = mode;
+        inStream.open(archiveName, mode);
+    }
 }
 
 /** 
 *   Open the output stream with a different mode 
 */
 void BasicArchive::openOutStream(std::ios_base::openmode mode) {
-    outStream.open(archiveName, mode);
+    if(isOutOpen() && mode != outMode) {
+        closeOutStream();
+        outMode = mode;
+        outStream.open(archiveName, mode);
+    }
 }
 
 /** 
 *   Open the input stream with a different mode 
 */
-void BasicArchive::openInStream(std::string archive_name, 
-                                std::ios_base::openmode mode) {
-    inStream.open(archive_name, mode);
+void BasicArchive::openInStream(std::string archive_name, std::ios_base::openmode mode) {
+    if(isInOpen() && mode != inMode) {
+        closeInStream();
+        inMode = mode;
+        inStream.open(archive_name, mode);
+    }
 }
 
 /** 
 *   Open the output stream with a different mode 
 */
-void BasicArchive::openOutStream(std::string archive_name, 
-                                 std::ios_base::openmode mode) {
-    outStream.open(archive_name, mode);
+void BasicArchive::openOutStream(std::string archive_name, std::ios_base::openmode mode) {
+    if(isOutOpen() && mode != outMode) {
+        closeOutStream();
+        outMode = mode;
+        outStream.open(archive_name, mode);
+    }
 }
 
 /** 
