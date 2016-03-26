@@ -40,6 +40,7 @@ public:
 template <class T>
 OutArchive& operator<<(OutArchive& out, T item) {
     out.put(item);
+    return out;
 }
 
 }
