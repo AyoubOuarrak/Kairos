@@ -6,7 +6,7 @@ namespace exception {
 /** 
 *   Constructor with char* message 
 */
-SerializationException::SerializationException(char* message, char* info) 
+SerializationException::SerializationException(char* message, const char* info)
     : Exception(message, info) {
     exp_type = "serialization"; 
             
