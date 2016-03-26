@@ -32,4 +32,4 @@ file(GLOB SOURCES
 	"src/serialization/*.cpp"
     "src/serialization/type/*.cpp")
 
-add_executable(bin/test ${SOURCES})
+add_executable(bin/test ${SOURCES} kairos.h)
