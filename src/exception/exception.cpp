@@ -6,7 +6,7 @@ namespace exception {
 /** 
 *   Constructor with char* message 
 */
-Exception::Exception(char* message, char* info) 
+Exception::Exception(char* message, const char* info)
     : exp_type("generic"), exp_msg(message), exp_info(info) {
             
 }
