@@ -2,24 +2,27 @@
 #define INCLUDE_SERIALIZATION_TYPE_BUILT_IN_H
 
 #include "../../archive/types/text.h"
+#include "../../archive/types/binary.h"
 #include "../../archive/archive.h"
+#include <iostream>
 
 namespace kairos {
 namespace serialization {
+using archive::Archive;
 
 /**
 *   Serialization of built-in types
 */
 class BuiltIn {
 private:
-    archive::Archive* archive;
+    Archive* archive;
 
 public:
     /** default construtor */
     BuiltIn();
 
     /** default construtor */
-    BuiltIn(archive::Archive*);
+    BuiltIn(Archive*);
 
     /** copy constructor */
     BuiltIn(const BuiltIn&);
@@ -30,7 +33,7 @@ public:
 
     /** save vector in the archive */
     template <class T>
-    void put(const T& src);
+    void put(T& src);
 
     /** get the vector from archive */
     template <class T>
@@ -43,16 +46,18 @@ public:
 *   << overloding operator 
 */
 template <class T>
-BuiltIn& operator<<(BuiltIn& out, const T& item) {
+BuiltIn& operator<<(BuiltIn& out, T& item) {
     out.put(item);
+    return out;
 }
 
 /** 
 *   >> overloding operator 
 */
 template <class T>
-BuiltIn& operator>>(const BuiltIn& in, T& item) {
+BuiltIn& operator>>(BuiltIn& in, T& item) {
     in.get(item);
+    return in;
 }
 
 }
