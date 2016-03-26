@@ -21,7 +21,7 @@ public:
     /** default construtor */
     BuiltIn();
 
-    /** default construtor */
+    /** construtor that take and archive */
     BuiltIn(Archive*);
 
     /** copy constructor */
