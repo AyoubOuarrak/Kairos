@@ -13,13 +13,16 @@ namespace serialization {
 /**
 *   Serialization of vectors
 */
-template <class vector_type, class archive_type = TextArchive>
-class Vector : public Archive {
+class Vector {
 private:
+    Archive* archive;
 
 public:
     /** default constructor */
     Vector();
+
+    /** constructor that take an archive */
+    Vector(Archive*);
 
     /** copy operator */
     Vector(const Vector&);
@@ -31,13 +34,34 @@ public:
     Archive operator=(const Vector&);
 
     /** save vector in the archive */
-    void put(const std::vector<vector_type>& src);
+    template <class T>
+    void put(const std::vector<T>& src);
 
     /** get the vector from archive */
-    void get(std::vector<vector_type>& dest);
+    template <class T>
+    void get(std::vector<T>& dest);
 };
 
 #include "templates/vector.templates.h"
+
+/**
+*   << overloding operator
+*/
+template <class T>
+Vector& operator<<(Vector& out, std::vector<T>& item) {
+    out.put(item);
+    return out;
+}
+
+/**
+*   >> overloding operator
+*/
+template <class T>
+Vector& operator>>(Vector& in, std::vector<T>& item) {
+    in.get(item);
+    return in;
+}
+
 }
 }
 
