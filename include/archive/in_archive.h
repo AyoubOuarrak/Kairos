@@ -40,6 +40,7 @@ public:
 template <class T>
 InArchive& operator>>(InArchive& in, T item) {
     in.get(item);
+    return in;
 }
 
 }
