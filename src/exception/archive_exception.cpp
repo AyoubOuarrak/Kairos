@@ -6,7 +6,7 @@ namespace exception {
 /** 
 *   Constructor with char* message 
 */
-ArchiveException::ArchiveException(char* message, char* info) : Exception(message, info) {
+ArchiveException::ArchiveException(char* message, const char* info) : Exception(message, info) {
     exp_type = "archive";          
 }
 
