@@ -1,8 +1,6 @@
 #include "../include/serialization/serializable.h"
 #include "../include/serialization/serialization.h"
 #include "../include/serialization/type/built_in.h"
-#include <iostream>
-#include <string>
 
 using namespace kairos;
 using namespace serialization;
@@ -28,7 +26,8 @@ public:
 
     void serialize() {
         /** get the type of archive from the archive manager */
-        BuiltIn native;
+        BuiltIn native(new BinaryArchive);
+
         /** add data to the archive */
         native << id << age;
     }
