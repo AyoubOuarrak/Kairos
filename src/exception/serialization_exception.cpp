@@ -1,5 +1,4 @@
 #include "../../include/exception/serialization_exception.h"
-
 namespace kairos {
 namespace exception {
 
@@ -8,7 +7,7 @@ namespace exception {
 */
 SerializationException::SerializationException(char* message, const char* info)
     : Exception(message, info) {
-    exp_type = "serialization"; 
+    exp_type = "serialization_exception";
             
 }
 
@@ -17,7 +16,7 @@ SerializationException::SerializationException(char* message, const char* info)
 */
 SerializationException::SerializationException(std::string message, std::string info) 
     : Exception(message, info) {
-    exp_type = "serialization"; 
+    exp_type = "serialization_exception";
 }
 
 /**
@@ -32,7 +31,7 @@ const char* SerializationException::what() const throw() {
 *   Return the exception info
 */
 const char* SerializationException::info() const throw() {
-    std::string message = "[INFO] : " + exp_info;
+    std::string message = "[INFO EXCEPTION] : " + exp_info;
     return message.c_str();
 }
 
