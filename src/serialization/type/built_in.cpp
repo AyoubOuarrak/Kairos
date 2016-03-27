@@ -10,9 +10,14 @@ BuiltIn::BuiltIn() {
     archive = new archive::TextArchive();
 }
 
+
+/**
+*   Take an archive
+*/
 BuiltIn::BuiltIn(archive::Archive* _archive) {
     archive = _archive;
 }
+
 /**
 *   Copy constructor
 */
@@ -26,6 +31,7 @@ BuiltIn::BuiltIn(const BuiltIn& built_in) {
 BuiltIn::~BuiltIn() {
     delete archive;
 }
+
 
 }
 }
