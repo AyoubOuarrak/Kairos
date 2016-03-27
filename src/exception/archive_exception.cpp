@@ -7,14 +7,14 @@ namespace exception {
 *   Constructor with char* message 
 */
 ArchiveException::ArchiveException(char* message, const char* info) : Exception(message, info) {
-    exp_type = "archive";          
+    exp_type = "archive_exception";
 }
 
 /** 
 *   Constructor with std string message 
 */
 ArchiveException::ArchiveException(std::string message, std::string info) : Exception(message, info) {
-    exp_type = "archive"; 
+    exp_type = "archive_exception";
 }
 
 /**
@@ -29,7 +29,7 @@ const char* ArchiveException::what() const throw() {
 *   Return the exception info
 */
 const char* ArchiveException::info() const throw() {
-    std::string message = "[INFO] : " + exp_info;
+    std::string message = "[INFO EXCEPTION] : " + exp_info;
     return message.c_str();
 }
 
