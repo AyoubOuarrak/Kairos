@@ -41,6 +41,12 @@ std::string BasicArchive::name() const {
     return archiveName;
 }
 
+/**
+*  Rename the archive
+*/
+void BasicArchive::rename(std::string newName) {
+    archiveName = newName;
+}
 
 /**
 *   Return if the input stream is open
@@ -61,15 +67,23 @@ bool BasicArchive::isOutOpen() const {
 */
 void BasicArchive::openInStream() {
     if(!isInOpen())
-        inStream.open(archiveName, std::ios::in);
+        try {
+            inStream.open(archiveName, std::ios::in);
+        } catch(...) {
+            throw new ArchiveException("can't open input file: " + archiveName);
+        }
 }
 
 /** 
 *   Open the output stream 
 */
 void BasicArchive::openOutStream() {
-    if(!isOutOpen())
-        outStream.open(archiveName, std::ios::out);
+    if (!isOutOpen())
+        try {
+            outStream.open(archiveName, std::ios::out);
+        } catch (...) {
+            throw new ArchiveException("can't open output file: " + archiveName);
+        }
 }
 
 /** 
@@ -77,9 +91,14 @@ void BasicArchive::openOutStream() {
 */
 void BasicArchive::openInStream(std::ios_base::openmode mode) {
     if(isInOpen() && mode != inMode) {
-        closeInStream();
-        inMode = mode;
-        inStream.open(archiveName, mode);
+        try {
+            closeInStream();
+            inMode = mode;
+            inStream.open(archiveName, mode);
+        } catch (...) {
+            throw new ArchiveException("can't open input file: " + archiveName);
+        }
+
     }
 }
 
@@ -88,9 +107,14 @@ void BasicArchive::openInStream(std::ios_base::openmode mode) {
 */
 void BasicArchive::openOutStream(std::ios_base::openmode mode) {
     if(isOutOpen() && mode != outMode) {
-        closeOutStream();
-        outMode = mode;
-        outStream.open(archiveName, mode);
+        try {
+            closeOutStream();
+            outMode = mode;
+            outStream.open(archiveName, mode);
+        } catch (...) {
+            throw new ArchiveException("can't open output file: " + archiveName);
+        }
+
     }
 }
 
@@ -99,9 +123,15 @@ void BasicArchive::openOutStream(std::ios_base::openmode mode) {
 */
 void BasicArchive::openInStream(std::string archive_name, std::ios_base::openmode mode) {
     if(isInOpen() && mode != inMode) {
-        closeInStream();
-        inMode = mode;
-        inStream.open(archive_name, mode);
+        try {
+            closeInStream();
+            inMode = mode;
+            inStream.open(archive_name, mode);
+        } catch (...) {
+            throw new ArchiveException("can't open input file: " + archiveName);
+        }
+
+
     }
 }
 
@@ -110,9 +140,13 @@ void BasicArchive::openInStream(std::string archive_name, std::ios_base::openmod
 */
 void BasicArchive::openOutStream(std::string archive_name, std::ios_base::openmode mode) {
     if(isOutOpen() && mode != outMode) {
-        closeOutStream();
-        outMode = mode;
-        outStream.open(archive_name, mode);
+        try {
+            closeOutStream();
+            outMode = mode;
+            outStream.open(archive_name, mode);
+        } catch (...) {
+            throw new ArchiveException("can't open output file: " + archiveName);
+        }
     }
 }
 
