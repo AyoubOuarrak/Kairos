@@ -1,6 +1,7 @@
 #ifndef INCLUDE_SERIALIZATION_SERIALIZATION_H
 #define INCLUDE_SERIALIZATION_SERIALIZATION_H
 
+#include "../exception/serialization_exception.h"
 #include "serializable.h"
 #include <cstdint>
 #include <map>
@@ -8,10 +9,11 @@
 namespace kairos {
 namespace serialization {
 
+using namespace exception;
 /**
 *   Class Serialization, provide methods for creating checkpoints and reload
 */
-class Serialization {
+class Serialization : public SerializationException {
 private:
     /** list of serializable objects */
     static std::map<Serializable*, uint16_t> serializableObjects;
