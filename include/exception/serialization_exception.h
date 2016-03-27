@@ -11,13 +11,14 @@ namespace exception {
 *   Serialization exceptions
 */
 class SerializationException : public Exception {
-public:
+protected:
     /** default constructor without message is not allowed */
-    SerializationException() = delete;
+    SerializationException() = default;
 
     /** assignment operator deleted */
     SerializationException operator=(const SerializationException&) = delete;
 
+public:
     /** constructor with char* message */
     explicit SerializationException(char* message, const char* info = "");
 
@@ -25,11 +26,11 @@ public:
     explicit SerializationException(std::string message, std::string info = "");
 
     /** default distructor */
-    virtual ~SerializationException() = default;
+    ~SerializationException() = default;
 
     /** return the exception message */
-    virtual const char* what() const throw();
-    virtual const char* info() const throw();
+    const char* what() const throw();
+    const char* info() const throw();
 };
 
 }
