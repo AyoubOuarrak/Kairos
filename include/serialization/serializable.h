@@ -25,8 +25,11 @@ public:
     /** default distructor */
     virtual ~Serializable();
 
-    /** virtual pure method to serialize native types */
+    /** virtual pure method to serialize types */
     virtual void serialize() = 0;
+
+    /** virtual pure method to deserialize types */
+    virtual void deserialize() = 0;
 };
 
 
