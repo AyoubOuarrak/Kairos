@@ -8,6 +8,7 @@ namespace archive {
 */
 TextArchive::TextArchive() : Archive() {
     std::rename("archive", "archive.text");
+    Archive::rename("archive.text");
 }
 
 /**
