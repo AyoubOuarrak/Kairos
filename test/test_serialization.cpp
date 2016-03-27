@@ -13,6 +13,8 @@ private:
 
 public:
     User() {
+        id = 0;
+        age = 0;
         registerType(this);
     };
     
@@ -22,49 +24,31 @@ public:
         registerType(this);
     }
 
+    void set(int id_, int age_) {
+        id = id_;
+        age = age_;
+    }
+
+    void get() {
+        std::cout << id << " " << age;
+    }
+
     ~User() {};
 
     void serialize() {
-        /** get the type of archive from the archive manager */
-        BuiltIn native(new BinaryArchive);
+        BuiltIn archive;
+        archive << id << age;
+    }
 
-        /** add data to the archive */
-        native << id << age;
+    void deserialize() {
+       // BuiltIn native;
+       // native >> id >> age;
     }
 };
 
 /**
- *  2) TEST TEXT SERIALIZATION USING BUILTIN ARCHIVE
- */
-class Player : public Serializable, public Serialization {
-private:
-    float score;
-
-public:
-    Player() {
-        score = 0.0;
-        registerType(this);
-    };
-    
-    Player(float _score)  {
-        score = _score;
-        registerType(this);
-    }
-
-    ~Player() {};
-
-    void serialize() {
-        /** get the type of archive from the archive manager */
-        BuiltIn native;
-
-        /** add data to the archive */
-        native << score;
-    }
-};
-
-/**
- *  3) TEST VECTOR SERIALIZATION
- */
+*  3) TEST VECTOR SERIALIZATION
+*/
 class Fizz : public Serializable, public Serialization {
 private:
     std::vector<int> v;
@@ -76,28 +60,29 @@ public:
         v.push_back(123);
         v.push_back(29342);
         v.push_back(12);
+        registerType(this);
     }
 
     void serialize() {
-        /** by default use a text archive */
         Vector vectorSer;
-
         vectorSer << v;
+    }
+
+    void deserialize() {
+        //Vector vectorSer;
+        //vectorSer >> v;
     }
 };
 
 int main() {
     User* user = new User(0, 23);
-    Player* player = new Player(3.43);
-    Player player0;
     Fizz fizz;
 
     Serialization::createCheckpoint(user);
-    Serialization::createCheckpoint(player);
-    Serialization::createCheckpoint(&player0);
     Serialization::createCheckpoint(&fizz);
 
-    
+    Serialization::restore<User>();
+
 }
 
 
