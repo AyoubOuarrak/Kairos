@@ -21,10 +21,10 @@ protected:
     /** string containing additional info about exception */
     std::string exp_info;
 
-public:
     /** default constructor without message is not allowed */
-    Exception() = delete;
+    Exception() = default;
 
+public:
     /** constructor with char* message */
     explicit Exception(char* message, const char* info = "");
 
