@@ -1,16 +1,19 @@
 #ifndef ARCHIVE_BASIC_ARCHIVE_H
 #define ARCHIVE_BASIC_ARCHIVE_H
 
+#include "../exception/archive_exception.h"
 #include <string>
 #include <fstream>
 
 namespace kairos {
 namespace archive {
 
+using exception::ArchiveException;
+
 /**
 *   Basic Archive class
 */
-class BasicArchive {
+class BasicArchive : public ArchiveException {
 private:
     /** in archive mode */
     std::ios_base::openmode inMode;
@@ -33,8 +36,9 @@ public:
     /** default distructor */
     virtual ~BasicArchive();
 
-    /** return the name of the archive */
+    /** return and set the name of the archive */
     std::string name() const;
+    void rename(std::string);
 
     /** control if the stream is open */
     bool isInOpen() const;
