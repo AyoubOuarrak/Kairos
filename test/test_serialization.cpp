@@ -78,8 +78,13 @@ int main() {
     User* user = new User(0, 23);
     Fizz fizz;
 
-    Serialization::createCheckpoint(user);
-    Serialization::createCheckpoint(&fizz);
+    try {
+        Serialization::createCheckpoint(user);
+        Serialization::createCheckpoint(&fizz);
+
+    } catch (SerializationException* exp) {
+        std::cout << exp->what() << std::endl;
+    }
 
     Serialization::restore<User>();
 
