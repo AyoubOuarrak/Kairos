@@ -16,6 +16,9 @@ public:
     /** default constructor */
     InArchive();
 
+    /** constructor that take the name of the archive */
+    explicit InArchive(std::string);
+
     /** copy operator */
     InArchive(const InArchive&);
     
