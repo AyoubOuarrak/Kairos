@@ -1,21 +1,19 @@
 #include "../../include/serialization/type/demangle_type.h"
 #include "../../include/serialization/serialization.h"
-#include <cxxabi.h>
-#include <cstdlib>
-#include <cstring>
 #include <iostream>
 
 namespace kairos {
 namespace serialization {
 
+std::map<Serializable*, uint16_t> Serialization::serializableObjects;
+std::map<uint16_t, std::string>   Serialization::serializedObjectsFiles;
+
 /**
 *   Register a new serializable object
 */
-uint16_t Serialization::registerType(Serializable* obj) {
-    uint16_t id = reinterpret_cast<uint64_t>(obj);
-
-    serializableObjects.insert(std::pair<uint16_t, Serializable*>(id, obj));
-    return id;
+void Serialization::registerType(Serializable* obj) {
+    uint16_t id = (uint16_t) reinterpret_cast<uint64_t>(obj);
+    serializableObjects.insert(std::pair<Serializable*, uint16_t>(obj, id));
 }
 
 /**
@@ -23,18 +21,20 @@ uint16_t Serialization::registerType(Serializable* obj) {
 */
 void Serialization::createCheckpoint(Serializable* ser) {
     ser->serialize();
-
-    uint16_t id = reinterpret_cast<uint64_t>(ser);
+    uint16_t id = serializableObjects.at(ser);
+    std::string demangledObject = demangleObject(*ser);
 
     if(std::ifstream("archive.text")) {
-        std::string definedFile = "archive.text." + demangleObject(*ser) + "." + std::to_string(id);
+        std::string definedFile = "archive.text." + demangledObject + "." + std::to_string(id);
         std::rename("archive.text", definedFile.c_str());
     }
 
     else if(std::ifstream("archive.binary")) {
-        std::string definedFile = "archive.binary." + demangleObject(*ser) + "." + std::to_string(id);
+        std::string definedFile = "archive.binary." + demangledObject + "." + std::to_string(id);
         std::rename("archive.binary", definedFile.c_str());
     }
+
+    serializedObjectsFiles.insert(std::pair<uint16_t, std::string>(id, demangledObject));
 }
 
 /**
@@ -43,7 +43,7 @@ void Serialization::createCheckpoint(Serializable* ser) {
 void Serialization::checkpoint() {
     std::map<uint16_t, Serializable*>::const_iterator objs;
     for(auto it = serializableObjects.begin(); it != serializableObjects.end(); ++it) 
-        (it->second)->serialize();
+        (it->first)->serialize();
 }
 
 }
