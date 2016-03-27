@@ -11,13 +11,14 @@ namespace exception {
 *   Archive exceptions
 */
 class ArchiveException : public Exception {
-public:
+protected:
     /** default constructor without message is not allowed */
-    ArchiveException() = delete;
+    ArchiveException() = default;
 
     /** assignment operator deleted */
     ArchiveException operator=(const ArchiveException&) = delete;
 
+public:
     /** constructor with char* message */
     explicit ArchiveException(char* message, const char* info = "");
 
@@ -25,11 +26,11 @@ public:
     explicit ArchiveException(std::string message, std::string info = "");
 
     /** default distructor */
-    virtual ~ArchiveException() = default;
+    ~ArchiveException() = default;
 
     /** return the exception message */
-    virtual const char* what() const throw();
-    virtual const char* info() const throw();
+    const char* what() const throw();
+    const char* info() const throw();
 };
 
 }
