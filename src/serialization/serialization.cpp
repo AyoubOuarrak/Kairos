@@ -20,9 +20,16 @@ void Serialization::registerType(Serializable* obj) {
 *   Serialize a specific object
 */
 void Serialization::createCheckpoint(Serializable* ser) {
-    ser->serialize();
-    uint16_t id = serializableObjects.at(ser);
     std::string demangledObject = demangleObject(*ser);
+    uint16_t id = 0;
+
+    try {
+        id = serializableObjects.at(ser);
+        ser->serialize();
+    } catch (std::out_of_range exp) {
+        throw new SerializationException(demangledObject + " not registered");
+    }
+
 
     if(std::ifstream("archive.text")) {
         std::string definedFile = "archive.text." + demangledObject + "." + std::to_string(id);
