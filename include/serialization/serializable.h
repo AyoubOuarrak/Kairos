@@ -2,6 +2,7 @@
 #define INCLUDE_SERIALIZATION_SERIALIZABLE_H
 
 #include "../archive/archive.h"
+#include <string>
 
 using namespace kairos::archive;
 
@@ -26,10 +27,10 @@ public:
     virtual ~Serializable();
 
     /** virtual pure method to serialize types */
-    virtual void serialize() = 0;
+    virtual void serialize(Archive&) = 0;
 
     /** virtual pure method to deserialize types */
-    virtual void deserialize() = 0;
+    virtual void deserialize(Archive&) = 0;
 };
 
 
