@@ -9,7 +9,7 @@ namespace archive {
 BasicArchive::BasicArchive() : archiveName("archive") {
     inMode = std::ios::in;
     outMode = std::ios::out;
-    inStream.open(archiveName, inMode);
+    //inStream.open(archiveName, inMode);
     outStream.open(archiveName, outMode);
 }
 
@@ -23,7 +23,7 @@ BasicArchive::BasicArchive(std::string _archiveName) {
     outMode = std::ios::out;
 
     inStream.open(archiveName, inMode);
-    outStream.open(archiveName, outMode);
+    //outStream.open(archiveName, outMode);
 }
 
 /**
