@@ -16,12 +16,14 @@ else()
         message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-
+include_directories(include/util.h)
+include_directories(include/floating_point.h)
 include_directories(include/archive)
 include_directories(include/archive/type)
 include_directories(include/exception)
 include_directories(include/serialization)
 include_directories(include/serialization/type)
+include_directories(include/serialization/templates)
 include_directories(include/serialization/type/templates)
   
 file(GLOB SOURCES 
