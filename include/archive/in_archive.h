@@ -30,6 +30,7 @@ public:
     virtual void get(long& dest) = 0;
     virtual void get(long long& dest) = 0;
     virtual void get(double& dest) = 0;
+    virtual void get(float& dest) = 0;
     virtual void get(char& dest) = 0;
     virtual void get(bool& dest) = 0;
 
