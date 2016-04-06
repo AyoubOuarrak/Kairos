@@ -1,42 +1,27 @@
 #ifndef ARCHIVE_ARCHIVE_H
 #define ARCHIVE_ARCHIVE_H
 
-#include "out_archive.h"
-#include "in_archive.h"
-
-#include <string>
-#include <fstream>
+#include "ioarchive.h"
 
 namespace kairos {
 namespace archive {
 
 /**
-*   Archive class, extend input archive and output archive
+*   High level archive class that save in text and in binary format
 */
-class Archive : public OutArchive, public InArchive {
-private:
-    typedef OutArchive output_archive;
-    typedef InArchive input_archive;
-    typedef BasicArchive io_archive;
-    
-protected:
-    /** local path of the archive in filesystem */
-    std::string archivePath;
-
+class Archive : public IOArchive {
 public:
     /** default constructor */
-    Archive();
-    /** copy operator */
-    Archive(const Archive&);
-    /** second constructor */
-    Archive(std::string path);
-    /** default distructor */
-    virtual ~Archive() = default;
+    Archive() : IOArchive() {};
+    Archive(const std::string name) : IOArchive(name) {};
 
+    /** default copy constructor */
+    Archive(const Archive&) {};
+
+    /** default distructor */
+    virtual ~Archive() {}
 };
 
-
 }
 }
-
-#endif
+#endif //KAIROS_ARCHIVE_H
