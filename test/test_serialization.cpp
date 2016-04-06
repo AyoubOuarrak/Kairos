@@ -35,14 +35,12 @@ public:
 
     ~User() {};
 
-    void serialize() {
-        BuiltIn archive;
+    void serialize(Archive& archive) {
         archive << id << age;
     }
 
-    void deserialize() {
-       // BuiltIn native;
-       // native >> id >> age;
+    void deserialize(Archive& archive) {
+        archive >> id >> age;
     }
 };
 
@@ -51,42 +49,55 @@ public:
 */
 class Fizz : public Serializable, public Serialization {
 private:
-    std::vector<int> v;
+    float v;
+    int a;
 
 public:
     Fizz() {
-        v.push_back(2);
-        v.push_back(9);
-        v.push_back(123);
-        v.push_back(29342);
-        v.push_back(12);
-        registerType(this);
+        v = 0.0;
+        a = 0;
+        registerType(this, Serialization::BINARY);
     }
 
-    void serialize() {
-        Vector vectorSer;
-        vectorSer << v;
+    Fizz(float _v, int _a) {
+        v = _v;
+        a = _a;
+        registerType(this, Serialization::BINARY);
     }
 
-    void deserialize() {
-        //Vector vectorSer;
-        //vectorSer >> v;
+    void serialize(Archive& archive) {
+        archive << v << a;
+    }
+
+    void deserialize(Archive& archive) {
+        archive >> v >> a;
     }
 };
 
 int main() {
     User* user = new User(0, 23);
-    Fizz fizz;
+    User* user2 = new User(4, 6);
+
+    Fizz fizz(3.2, 1);
 
     try {
         Serialization::createCheckpoint(user);
+        Serialization::createCheckpoint(user2);
         Serialization::createCheckpoint(&fizz);
 
     } catch (SerializationException* exp) {
         std::cout << exp->what() << std::endl;
     }
 
-    Serialization::restore<User>();
+   /* User user3;
+    try {
+        user3 = Serialization::restore<User>();
+
+    } catch (SerializationException* exp) {
+        std::cout << exp->what() << std::endl;
+    }
+
+    user3.get();*/
 
 }
 
