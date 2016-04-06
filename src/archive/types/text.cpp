@@ -12,6 +12,13 @@ TextArchive::TextArchive() : Archive() {
 }
 
 /**
+*   Constructor that open an input archive with the given filename
+*/
+TextArchive::TextArchive(const std::string fileName) : Archive(fileName) {
+
+}
+
+/**
 *   Copy operator of text archive
 */
 TextArchive::TextArchive(const TextArchive&) {
@@ -21,7 +28,7 @@ TextArchive::TextArchive(const TextArchive&) {
 /**
 *   Sssignment operator
 */
-Archive TextArchive::operator=(const TextArchive&) {
+IOArchive TextArchive::operator=(const TextArchive&) {
 }
 
 /**
@@ -58,7 +65,14 @@ void TextArchive::put(long long src) {
 void TextArchive::put(double src) {
     outStream << src << " "; 
 }
- 
+
+/**
+*   Put float from archive
+*/
+void TextArchive::put(float src) {
+    outStream << src;
+}
+
 /** 
 *   Put char in the text archive
 */     
@@ -106,6 +120,13 @@ void TextArchive::get(long long& dest) {
 
 */   
 void TextArchive::get(double& dest) {
+    inStream >> dest;
+}
+
+/**
+*   Get float from archive
+*/
+void TextArchive::get(float& dest) {
     inStream >> dest;
 }
 
