@@ -11,6 +11,13 @@ InArchive::InArchive() : BasicArchive() {
 }
 
 /**
+*    Construct that take the name of an archive
+*/
+InArchive::InArchive(std::string fileName) : BasicArchive(fileName) {
+
+}
+
+/**
 *   copy operator
 */
 InArchive::InArchive(const InArchive& i_archive) {
