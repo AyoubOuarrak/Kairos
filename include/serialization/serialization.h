@@ -2,8 +2,13 @@
 #define INCLUDE_SERIALIZATION_SERIALIZATION_H
 
 #include "../exception/serialization_exception.h"
+#include "../archive/types/binary.h"
+#include "../archive/types/text.h"
 #include "serializable.h"
+#include "../utils.h"
+#include <iostream>
 #include <cstdint>
+#include <list>
 #include <map>
 
 namespace kairos {
@@ -16,26 +21,23 @@ using namespace exception;
 class Serialization : public SerializationException {
 private:
     /** serialization configuration file */
-    std::ifstream serializationConf;
+    static std::ifstream serializationIndexIn;
+    static std::ofstream serializationIndexOut;
 
-    /** the Serializer has been initialize?*/
     static bool initialized;
 
     /** list of serializable objects */
     static std::map<Serializable*, uint16_t> serializableObjects;
-    static std::map<Serializable*, std::string> ObjectjFormatSerialization;
-    static std::map<uint16_t, std::string> serializedObjectsFiles;
-
-    /** method to init serialization */
-    void initSerialization();
+    static std::map<Serializable*, std::string> ObjectsFormatSerialization;
 
 protected:
     /** default constructor */
     Serialization();
+    ~Serialization();
 
     /** add obj to the list of object that need to be serialized */
-    void registerType(Serializable*);
-    void registerType(Serializable*, std::string);
+    static void registerType(Serializable*);
+    static void registerType(Serializable*, std::string);
 
     /** get the serializable object from the id */
     Serializable* getObject(uint16_t id);
@@ -49,11 +51,14 @@ public:
     static void createCheckpoint(Serializable*);
 
     /** restore object */
-    static void restore(Serializable*);
+    template <class type>
+    static std::list<type*> restore();
 
     /** serialize all object in the list */
     void checkpoint();
 };
+
+#include "serialization.template.h"
 
 }
 }
