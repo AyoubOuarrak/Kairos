@@ -77,8 +77,8 @@ public:
 int main() {
     User* user = new User(0, 23);
     User* user2 = new User(4, 6);
-
     Fizz fizz(3.2, 1);
+
 
     try {
         Serialization::createCheckpoint(user);
@@ -89,15 +89,13 @@ int main() {
         std::cout << exp->what() << std::endl;
     }
 
-   /* User user3;
+    std::list<User*> users;
     try {
-        user3 = Serialization::restore<User>();
+        users = Serialization::restore<User>();
 
     } catch (SerializationException* exp) {
         std::cout << exp->what() << std::endl;
     }
-
-    user3.get();*/
 
 }
 
