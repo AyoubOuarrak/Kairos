@@ -12,6 +12,7 @@
 namespace kairos {
 namespace utils {
 
+
 /**
 *   Check if two template T & U are equal
 */
@@ -28,6 +29,14 @@ bool is_same(::std::string U) {
 #else
     return TO_STRING(T) == U;
 #endif
+}
+
+/**
+* return the name of a type
+*/
+template <typename T>
+std::string to_string(const T& name) {
+    return TO_STRING(name);
 }
 
 /**
