@@ -3,7 +3,7 @@
 *   Restore a serializable object
 */
 template <class ClassType>
-std::list<ClassType*> Serialization::restore() {
+std::map<std::string, ClassType*> Serialization::restore() {
     serializationIndexOut.close();
     serializationIndexIn.close();
     serializationIndexIn.open("serialization.index", std::ios::in);
@@ -11,15 +11,15 @@ std::list<ClassType*> Serialization::restore() {
     std::string className;
     std::string classSerializationFormat;
     std::string classSerializationFile;
-    std::list<ClassType*> serializedObjects;
+    std::map<std::string, ClassType*> serializedObjects;
+    int counter = 1;
 
     /** iterate over the serialization index */
     while(serializationIndexIn >> className >> classSerializationFormat >> classSerializationFile) {
         /** if the classname is the same the template type */
         if(utils::is_same<ClassType>(className)) {
-            std::cout << className << std::endl;
             /** create a new empty object, get the file name of the archive and start to load data */
-            ClassType* object = new ClassType;
+            ClassType* object = new ClassType();
 
             try {
                 if (classSerializationFormat == Serialization::TEXT) {
@@ -32,7 +32,7 @@ std::list<ClassType*> Serialization::restore() {
                     object->deserialize(archive);
                 }
 
-                serializedObjects.push_back(object);
+                serializedObjects.insert(std::pair<std::string, ClassType*>(className + std::to_string(counter++), object));
                 registerType(object, classSerializationFormat);
 
             } catch (std::out_of_range exp) {
