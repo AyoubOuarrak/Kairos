@@ -28,10 +28,10 @@ public:
     IOArchive();
 
     /** copy operator */
-    IOArchive(const IOArchive&);
+    explicit IOArchive(const IOArchive&);
 
     /** second constructor */
-    IOArchive(const std::string path);
+    explicit IOArchive(std::string path);
 
     /** default distructor */
     virtual ~IOArchive() = default;
