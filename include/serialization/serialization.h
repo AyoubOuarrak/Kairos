@@ -8,7 +8,6 @@
 #include "../utils.h"
 #include <iostream>
 #include <cstdint>
-#include <list>
 #include <map>
 
 namespace kairos {
@@ -52,7 +51,7 @@ public:
 
     /** restore object */
     template <class type>
-    static std::list<type*> restore();
+    static std::map<std::string, type*> restore();
 
     /** serialize all object in the list */
     void checkpoint();
