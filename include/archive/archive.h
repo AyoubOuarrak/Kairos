@@ -13,13 +13,13 @@ class Archive : public IOArchive {
 public:
     /** default constructor */
     Archive() : IOArchive() {};
-    Archive(const std::string name) : IOArchive(name) {};
+    explicit Archive(std::string name) : IOArchive(name) {};
 
     /** default copy constructor */
     Archive(const Archive&) {};
 
     /** default distructor */
-    virtual ~Archive() {}
+    ~Archive() {}
 };
 
 }
