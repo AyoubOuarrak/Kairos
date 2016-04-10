@@ -19,7 +19,7 @@ public:
     TextArchive();
 
     /** constructor that take the name of an archive */
-    explicit TextArchive(const std::string);
+    explicit TextArchive(std::string);
 
     /** copy constructor */
     TextArchive(const TextArchive&);
