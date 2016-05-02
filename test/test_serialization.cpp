@@ -1,4 +1,5 @@
 #include "../kairos.h"
+#include <list>
 
 using namespace kairos;
 using namespace serialization;
@@ -89,9 +90,8 @@ int main() {
         std::cout << exp->what() << std::endl;
     }
 
-    std::list<User*> users;
     try {
-        users = Serialization::restore<User>();
+        auto users = Serialization::restore<User>();
 
     } catch (SerializationException* exp) {
         std::cout << exp->what() << std::endl;
