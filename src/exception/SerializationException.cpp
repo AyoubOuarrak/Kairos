@@ -1,4 +1,4 @@
-#include "../../include/exception/serialization_exception.h"
+#include "SerializationException.h"
 namespace kairos {
 namespace exception {
 

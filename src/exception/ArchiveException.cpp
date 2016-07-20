@@ -1,4 +1,4 @@
-#include "../../include/exception/archive_exception.h"
+#include "ArchiveException.h"
 
 namespace kairos {
 namespace exception {

@@ -1,4 +1,4 @@
-#include "../../include/archive/in_archive.h"
+#include "InputArchive.h"
 
 namespace kairos {
 namespace archive {
@@ -6,8 +6,8 @@ namespace archive {
 /**
 *   Default construct of the input archive, it open the input stream
 */
-InArchive::InArchive() : BasicArchive() {
-    
+InArchive::InArchive()  {
+
 }
 
 /**

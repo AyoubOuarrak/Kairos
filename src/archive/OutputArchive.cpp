@@ -1,4 +1,4 @@
-#include "../../include/archive/out_archive.h"
+#include "OutputArchive.h"
 
 namespace kairos {
 namespace archive {
