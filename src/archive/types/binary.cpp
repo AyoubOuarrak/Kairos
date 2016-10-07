@@ -1,6 +1,9 @@
-#include "../../include/archive/types/binary.h"
+//#include "../../../include/archive/types/Binary.h"
 #include "../../../include/floating_point.h"
 #include <iostream>
+#include <Archive.h>
+#include <types/Binary.h>
+
 namespace kairos {
 namespace archive {
 
@@ -95,6 +98,13 @@ void BinaryArchive::put(char src) {
 }
 
 /**
+*   Put string in the Binary archive
+*/
+void BinaryArchive::put(std::string src) {
+    put((char*)&src, sizeof(src));
+}
+
+/**
 *   Put bool in the Binary archive
 */
 void BinaryArchive::put(bool src) {
@@ -154,6 +164,13 @@ void BinaryArchive::get(bool& dst) {
 */
 void BinaryArchive::get(char& dst) {
     get((char*)dst, sizeof(dst));
+}
+
+/**
+*   Get string from the archive
+*/
+void BinaryArchive::get(std::string& dst) {
+    get((char*)dst.c_str(), sizeof(dst));
 }
 
 }

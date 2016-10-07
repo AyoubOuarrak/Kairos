@@ -1,7 +1,7 @@
 #ifndef ARCHIVE_INPUT_ARCHIVE_H
 #define ARCHIVE_INPUT_ARCHIVE_H
 
-#include "basic_archive.h"
+#include <BasicArchive.h>
 #include <string>
 #include <fstream>
 
@@ -33,6 +33,7 @@ public:
     virtual void get(float& dest) = 0;
     virtual void get(char& dest) = 0;
     virtual void get(bool& dest) = 0;
+    virtual void get(std::string& dest) = 0;
 
     /** for binary serialization of sz bytes */
     virtual void get(char* p, std::size_t sz) = 0;

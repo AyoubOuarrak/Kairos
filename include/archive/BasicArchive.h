@@ -1,7 +1,7 @@
 #ifndef ARCHIVE_BASIC_ARCHIVE_H
 #define ARCHIVE_BASIC_ARCHIVE_H
 
-#include "../exception/archive_exception.h"
+#include <ArchiveException.h>
 #include <string>
 #include <fstream>
 

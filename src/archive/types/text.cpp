@@ -1,4 +1,6 @@
-#include "../../include/archive/types/text.h"
+//#include "../../../include/archive/types/Text.h"
+#include <iostream>
+#include <types/Text.h>
 
 namespace kairos {
 namespace archive {
@@ -14,7 +16,7 @@ TextArchive::TextArchive() : Archive() {
 /**
 *   Constructor that open an input archive with the given filename
 */
-TextArchive::TextArchive(const std::string fileName) : Archive(fileName) {
+TextArchive::TextArchive(std::string fileName) : Archive(fileName) {
 
 }
 
@@ -80,6 +82,13 @@ void TextArchive::put(char src) {
     outStream << src << " "; 
 }
 
+/**
+*   Put string in the text archive
+*/
+void TextArchive::put(std::string src) {
+    outStream << src << " ";
+}
+
 /** 
 *   Put bool in the text archive
 */     
@@ -138,9 +147,16 @@ void TextArchive::get(bool& dest) {
 }
 
 /** 
-*   Get bool from the archive 
+*   Get char from the archive
 */
 void TextArchive::get(char& dest) {
+    inStream >> dest;
+}
+
+/**
+*   Get string from the archive
+*/
+void TextArchive::get(std::string& dest) {
     inStream >> dest;
 }
 
@@ -150,6 +166,8 @@ void TextArchive::get(char& dest) {
 void TextArchive::get(char*, std::size_t) {
     // empty body
 }
+
+
 
 }
 }

@@ -1,4 +1,4 @@
-#include "../../include/serialization/serialization.h"
+#include <Serialization.h>
 
 namespace kairos {
 namespace serialization {

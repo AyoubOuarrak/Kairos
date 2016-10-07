@@ -1,7 +1,7 @@
 #ifndef INCLUDE_SERIALIZATION_SERIALIZABLE_H
 #define INCLUDE_SERIALIZATION_SERIALIZABLE_H
 
-#include "../archive/archive.h"
+#include <Archive.h>
 #include <string>
 
 using namespace kairos::archive;

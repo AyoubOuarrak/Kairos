@@ -1,4 +1,4 @@
-#include "../../include/archive/ioarchive.h"
+#include <IOArchive.h>
 
 namespace kairos {
 namespace archive {
@@ -20,8 +20,8 @@ IOArchive::IOArchive(const IOArchive& archive_) {
 /**
 *   Second constructor 
 */
-IOArchive::IOArchive(const std::string path) : input_archive(path), output_archive() {
-    archivePath = path;
+IOArchive::IOArchive(std::string path) : input_archive(path) {
+    //archivePath = path;
 }
 
 

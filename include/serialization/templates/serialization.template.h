@@ -34,6 +34,7 @@ std::map<std::string, ClassType*> Serialization::restore() {
 
                 serializedObjects.insert(std::pair<std::string, ClassType*>(className + std::to_string(counter++), object));
                 registerType(object, classSerializationFormat);
+                //std::cout <<
 
             } catch (std::out_of_range exp) {
                 std::cout << exp.what() << std::endl;

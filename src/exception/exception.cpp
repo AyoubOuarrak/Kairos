@@ -1,4 +1,4 @@
-#include "../../include/exception/exception.h"
+#include <Exception.h>
 
 namespace kairos {
 namespace exception {

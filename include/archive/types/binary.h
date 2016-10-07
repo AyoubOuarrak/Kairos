@@ -1,7 +1,7 @@
 #ifndef ARCHIVE_TYPES_BINARY_ARCHIVE_H
 #define ARCHIVE_TYPES_BINARY_ARCHIVE_H
 
-#include "../archive.h"
+#include <Archive.h>
 #include <string>
 #include <fstream>
 
@@ -18,6 +18,7 @@ private:
     void put(float dest);
     void put(char src);
     void put(bool src);
+    void put(std::string src);
 
     void get(int& dest);
     void get(long& dest);
@@ -26,6 +27,7 @@ private:
     void get(float& dest);
     void get(char& dest);
     void get(bool& dest);
+    void get(std::string& dest);
 
 public:
     /** default ctor */

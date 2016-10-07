@@ -1,7 +1,7 @@
 #ifndef INCLUDE_EXCEPTION_ARCHIVE_EXCEPTION_H
 #define INCLUDE_EXCEPTION_ARCHIVE_EXCEPTION_H
 
-#include "exception.h"
+#include <Exception.h>
 #include <string>
 
 namespace kairos {

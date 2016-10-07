@@ -1,7 +1,7 @@
 #ifndef ARCHIVE_OUTPUT_ARCHIVE_H
 #define ARCHIVE_OUTPUT_ARCHIVE_H
 
-#include "basic_archive.h"
+#include <BasicArchive.h>
 #include <string>
 #include <fstream>
 
@@ -30,6 +30,7 @@ public:
     virtual void put(float dest) = 0;
     virtual void put(char src) = 0;
     virtual void put(bool src) = 0;
+    virtual void put(std::string src) = 0;
 
     /** for binary serialization of sz bytes */
     virtual void put(char* p, std::size_t sz) = 0;

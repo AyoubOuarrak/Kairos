@@ -1,4 +1,5 @@
 #include "../kairos.h"
+#include <vector>
 
 using namespace kairos;
 using namespace serialization;
@@ -9,94 +10,57 @@ using namespace serialization;
 class User : public Serializable, public Serialization {
 private:
     int id;
-    int age;
 
 public:
     User() {
         id = 0;
-        age = 0;
         registerType(this);
     };
     
-    User(int id_, int age_)  {
+    User(int id_)  {
         id = id_;
-        age = age_;
         registerType(this);
     }
 
-    void set(int id_, int age_) {
+    void set(int id_) {
         id = id_;
-        age = age_;
     }
 
     void get() {
-        std::cout << id << " " << age;
+        std::cout << id;
     }
 
     ~User() {};
 
     void serialize(Archive& archive) {
-        archive << id << age;
+        archive << id;
     }
 
     void deserialize(Archive& archive) {
-        archive >> id >> age;
+        archive >> id;
     }
 };
 
-/**
-*  3) TEST VECTOR SERIALIZATION
-*/
-class Fizz : public Serializable, public Serialization {
-private:
-    float v;
-    int a;
-
-public:
-    Fizz() {
-        v = 0.0;
-        a = 0;
-        registerType(this, Serialization::BINARY);
-    }
-
-    Fizz(float _v, int _a) {
-        v = _v;
-        a = _a;
-        registerType(this, Serialization::BINARY);
-    }
-
-    void serialize(Archive& archive) {
-        archive << v << a;
-    }
-
-    void deserialize(Archive& archive) {
-        archive >> v >> a;
-    }
-};
 
 int main() {
-    User* user = new User(0, 23);
-    User* user2 = new User(4, 6);
-    Fizz fizz(3.2, 1);
+    User* user = new User(98);
 
-
+    /** serialization */
     try {
         Serialization::createCheckpoint(user);
-        Serialization::createCheckpoint(user2);
-        Serialization::createCheckpoint(&fizz);
 
     } catch (SerializationException* exp) {
         std::cout << exp->what() << std::endl;
     }
 
-    std::list<User*> users;
+    /** deserialization */
     try {
-        users = Serialization::restore<User>();
+        auto users = Serialization::restore<User>();
+        users.at("User1")->get();
 
     } catch (SerializationException* exp) {
         std::cout << exp->what() << std::endl;
     }
-
 }
 
 

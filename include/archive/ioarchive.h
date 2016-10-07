@@ -1,9 +1,8 @@
 #ifndef ARCHIVE_IOARCHIVE_H
 #define ARCHIVE_IOARCHIVE_H
 
-#include "out_archive.h"
-#include "in_archive.h"
-
+#include <OutputArchive.h>
+#include <InputArchive.h>
 #include <string>
 #include <fstream>
 
@@ -14,7 +13,7 @@ namespace archive {
 *   Archive class, extend input archive and output archive
 */
 class  IOArchive : public OutArchive, public InArchive {
-private:
+protected:
     typedef OutArchive output_archive;
     typedef InArchive input_archive;
     typedef BasicArchive io_archive;
@@ -37,7 +36,6 @@ public:
     virtual ~IOArchive() = default;
 
 };
-
 
 }
 }

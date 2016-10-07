@@ -1,10 +1,10 @@
 #ifndef INCLUDE_SERIALIZATION_SERIALIZATION_H
 #define INCLUDE_SERIALIZATION_SERIALIZATION_H
 
-#include "../exception/serialization_exception.h"
-#include "../archive/types/binary.h"
-#include "../archive/types/text.h"
-#include "serializable.h"
+#include <SerializationException.h>
+#include <types/Binary.h>
+#include <types/Text.h>
+#include <Serializable.h>
 #include "../utils.h"
 #include <iostream>
 #include <cstdint>

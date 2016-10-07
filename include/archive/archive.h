@@ -1,7 +1,7 @@
 #ifndef ARCHIVE_ARCHIVE_H
 #define ARCHIVE_ARCHIVE_H
 
-#include "ioarchive.h"
+#include <IOArchive.h>
 
 namespace kairos {
 namespace archive {
