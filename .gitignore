@@ -6,3 +6,5 @@ bin/
 CMakeFiles/
 .idea/
 archive.*
+serialization.index
+archive
