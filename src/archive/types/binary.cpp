@@ -76,7 +76,7 @@ void BinaryArchive::put(float src) {
 *   Put char in the Binary archive
 */
 void BinaryArchive::put(char src) {
-    put((char*)&src, sizeof(src));
+    outStream.write(&src, sizeof(char));
 }
 
 /**
@@ -145,7 +145,7 @@ void BinaryArchive::get(bool& dst) {
 *   Get bool from the archive
 */
 void BinaryArchive::get(char& dst) {
-    get((char*)dst, sizeof(dst));
+    inStream.read(&dst, sizeof(char));
 }
 
 /**

@@ -29,7 +29,7 @@ public:
     }
 
     void get() {
-        std::cout << id << " " << a << " " << name;
+        std::cout << id << " " << a << " " << name << '\n';
     }
 
     ~User() {};
@@ -83,7 +83,7 @@ public:
 
 int main() {
     User* user = new User(98, 2.4, "Chico");
-    FizzBin* fizz = new FizzBin(2.3, 234.03, 'c');
+    FizzBin* fizz = new FizzBin(2.3, 2342.05, 'z');
 
     /** serialization */
     try {
