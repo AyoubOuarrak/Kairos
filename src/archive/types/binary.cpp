@@ -61,7 +61,7 @@ void BinaryArchive::put(long long src) {
 */
 void BinaryArchive::put(double src) {
     uint64_t buffer = to_uint64(src);
-    put((char*)&buffer, sizeof(src));
+    put((char*)&buffer, sizeof(buffer));
 }
 
 /**
@@ -69,7 +69,7 @@ void BinaryArchive::put(double src) {
 */
 void BinaryArchive::put(float src) {
     uint32_t buffer =  to_uint32(src);
-    put((char*)&buffer, sizeof(src));
+    put((char*)&buffer, sizeof(buffer));
 }
 
 /**
@@ -120,8 +120,8 @@ void BinaryArchive::get(long long& dst) {
 
 */
 void BinaryArchive::get(double& dst) {
-    char* buffer;
-    get(buffer, sizeof(dst));
+    uint64_t buffer;
+    get((char*)&buffer, sizeof(dst));
     dst = from_uint64((uint64_t)buffer);
 }
 
@@ -129,9 +129,9 @@ void BinaryArchive::get(double& dst) {
 *   Get float from archive
 */
 void BinaryArchive::get(float& dst) {
-    char* buffer;
-    get(buffer, sizeof(dst));
-    dst = from_uint32((uint64_t)buffer);
+    uint32_t buffer;
+    get((char*)&buffer, sizeof(buffer));
+    dst = from_uint32((uint32_t)buffer);
 }
 
 /**
