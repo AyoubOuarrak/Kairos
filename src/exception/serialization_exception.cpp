@@ -5,16 +5,16 @@ namespace exception {
 /** 
 *   Constructor with char* message 
 */
-SerializationException::serialization_exception(char* message, const char* info)
+SerializationException::SerializationException(char* message, const char* info)
     : Exception(message, info) {
     exp_type = "serialization_exception";
             
 }
 
-/** 
-*   Constructor with std string message 
+/**
+*   Constructor with std string message
 */
-SerializationException::serialization_exception(std::string message, std::string info)
+SerializationException::SerializationException(std::string message, std::string info)
     : Exception(message, info) {
     exp_type = "serialization_exception";
 }

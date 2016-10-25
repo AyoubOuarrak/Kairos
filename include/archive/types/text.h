@@ -1,7 +1,7 @@
 #ifndef ARCHIVE_TYPES_TEXT_ARCHIVE_H
 #define ARCHIVE_TYPES_TEXT_ARCHIVE_H
 
-#include <Archive.h>
+#include <archive.h>
 #include <string>
 #include <fstream>
 
@@ -22,13 +22,13 @@ public:
     explicit TextArchive(std::string);
 
     /** copy constructor */
-    TextArchive(const TextArchive&);
+    explicit TextArchive(const TextArchive&) = delete;
 
     /** assignment operator */
-    IOArchive operator=(const TextArchive&);
+    IOArchive operator=(const TextArchive&) = delete;
     
     /** default dtor */
-    virtual ~TextArchive();
+    virtual ~TextArchive() = default;
 
     /** override for put functions */
     void put(int src);

@@ -18,6 +18,7 @@ endif()
 
 include_directories(include/utils.h)
 include_directories(include/floating_point.h)
+include_directories(include/constants.h)
 include_directories(include/archive)
 include_directories(include/archive/type)
 include_directories(include/exception)
@@ -28,6 +29,7 @@ include_directories(include/serialization/type/templates)
   
 file(GLOB SOURCES 
 	    "test/*.cpp"
+        "src/constants.cpp"
         "src/utils.cpp"
 	    "src/archive/*.cpp"
         "src/archive/types/*.cpp"
@@ -35,4 +37,4 @@ file(GLOB SOURCES
 	    "src/serialization/*.cpp"
         "src/serialization/type/*.cpp")
 
-add_executable(bin/test ${SOURCES} kairos.h)
+add_executable(main ${SOURCES} kairos.h)

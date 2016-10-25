@@ -22,23 +22,24 @@ std::map<std::string, ClassType*> Serialization::restore() {
             ClassType* object = new ClassType();
 
             try {
-                if (classSerializationFormat == Serialization::TEXT) {
+                if (classSerializationFormat == kairos::SerializationFormats::TEXT) {
                     TextArchive archive(classSerializationFile);
                     object->deserialize(archive);
-                }
 
-                if (classSerializationFormat == Serialization::BINARY) {
+                } else if (classSerializationFormat == kairos::SerializationFormats::BINARY) {
                     BinaryArchive archive(classSerializationFile);
                     object->deserialize(archive);
                 }
 
                 serializedObjects.insert(std::pair<std::string, ClassType*>(className + std::to_string(counter++), object));
                 registerType(object, classSerializationFormat);
-                //std::cout <<
 
             } catch (std::out_of_range exp) {
                 std::cout << exp.what() << std::endl;
                 throw new SerializationException("errors trying to deserialize " + className);
+
+            } catch (ArchiveException* exp) {
+                throw exp;
 
             } catch (SerializationException* exp) {
                 throw exp;

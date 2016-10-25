@@ -1,8 +1,7 @@
-//#include "../../../include/archive/types/Binary.h"
 #include "../../../include/floating_point.h"
 #include <iostream>
-#include <Archive.h>
-#include <types/Binary.h>
+#include <archive.h>
+#include <types/binary.h>
 
 namespace kairos {
 namespace archive {
@@ -11,31 +10,14 @@ namespace archive {
 *   Default construct of the text archive
 */
 BinaryArchive::BinaryArchive() : Archive() {
-    openInStream(std::ios::in | std::ios::binary);
-    openOutStream(std::ios::out | std::ios::binary);
-    std::rename("archive", "archive.binary");
-    Archive::rename("archive.binary");
+
 }
 
 /**
 *   Constructor that open an input archive with the given fileName
 */
-BinaryArchive::BinaryArchive(const std::string fileName) : Archive(fileName) {
-
-}
-
-/**
-*   Copy operator of text archive
-*/
-BinaryArchive::BinaryArchive(const BinaryArchive&) {
-
-}
-
-/**
-*   Default distructor 
-*/
-BinaryArchive::~BinaryArchive() {
-
+BinaryArchive::BinaryArchive(std::string fileName) : Archive(fileName) {
+    openInStream(fileName, std::ios::in | std::ios::binary);
 }
 
 /**

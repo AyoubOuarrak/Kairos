@@ -1,7 +1,7 @@
 #ifndef INCLUDE_EXCEPTION_ARCHIVE_EXCEPTION_H
 #define INCLUDE_EXCEPTION_ARCHIVE_EXCEPTION_H
 
-#include <Exception.h>
+#include <kairos_exception.h>
 #include <string>
 
 namespace kairos {
@@ -20,7 +20,7 @@ protected:
 
 public:
     /** constructor with char* message */
-    explicit ArchiveException(char* message, const char* info = "");
+    explicit ArchiveException(const char* message, const char* info = "");
 
     /** constructor with std string message */
     explicit ArchiveException(std::string message, std::string info = "");

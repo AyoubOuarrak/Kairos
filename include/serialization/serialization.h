@@ -1,10 +1,11 @@
 #ifndef INCLUDE_SERIALIZATION_SERIALIZATION_H
 #define INCLUDE_SERIALIZATION_SERIALIZATION_H
 
-#include <SerializationException.h>
-#include <types/Binary.h>
-#include <types/Text.h>
-#include <Serializable.h>
+#include <serialization_exception.h>
+#include <types/binary.h>
+#include <types/text.h>
+#include <serializable.h>
+#include <../constants.h>
 #include "../utils.h"
 #include <iostream>
 #include <cstdint>
@@ -41,10 +42,6 @@ protected:
     /** get the serializable object from the id */
     Serializable* getObject(uint16_t id);
 
-    /** type of serialization */
-    const static std::string BINARY;
-    const static std::string TEXT;
-
 public:
     /** call serialize method for a specific object */
     static void createCheckpoint(Serializable*);
@@ -56,6 +53,7 @@ public:
     /** serialize all object in the list */
     void checkpoint();
 };
+
 
 #include "serialization.template.h"
 

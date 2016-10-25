@@ -1,7 +1,7 @@
 #ifndef ARCHIVE_TYPES_BINARY_ARCHIVE_H
 #define ARCHIVE_TYPES_BINARY_ARCHIVE_H
 
-#include <Archive.h>
+#include <archive.h>
 #include <string>
 #include <fstream>
 
@@ -34,13 +34,16 @@ public:
     BinaryArchive();
 
     /** open an input archive */
-    explicit BinaryArchive(const std::string);
+    explicit BinaryArchive(std::string);
 
     /** copy constructor */
-    BinaryArchive(const BinaryArchive&);
+    explicit BinaryArchive(const BinaryArchive&) = delete;
+
+    /** assignment operator */
+    BinaryArchive&operator=(const BinaryArchive&) = delete;
 
     /** default dtor */
-    virtual ~BinaryArchive();
+    virtual ~BinaryArchive() = default;
 
     /** override for binary serialization of sz bytes */
     void get(char* p, std::size_t sz);
