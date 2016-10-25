@@ -1,4 +1,5 @@
-#include "../../include/archive/types/text.h"
+#include <iostream>
+#include <types/text.h>
 
 namespace kairos {
 namespace archive {
@@ -6,85 +7,71 @@ namespace archive {
 /**
 *   Default construct of the text archive
 */
-TextArchive::TextArchive() : Archive() {
-    std::rename("archive", "archive.text");
-    Archive::rename("archive.text");
+TextArchive::TextArchive() {
+
 }
 
 /**
 *   Constructor that open an input archive with the given filename
 */
-TextArchive::TextArchive(const std::string fileName) : Archive(fileName) {
-
-}
-
-/**
-*   Copy operator of text archive
-*/
-TextArchive::TextArchive(const TextArchive&) {
-
-}
-
-/**
-*   Sssignment operator
-*/
-IOArchive TextArchive::operator=(const TextArchive&) {
-}
-
-/**
-*   Default distructor 
-*/
-TextArchive::~TextArchive() {
-
+TextArchive::TextArchive(std::string fileName) : Archive(fileName) {
+    openInStream(fileName, std::ios::in);
 }
 
 /** 
 *   Put int in the text archive
 */
 void TextArchive::put(int src) {
-    outStream << src << " " ;
+    outStream << src << ' ';
 }
 
 /** 
 *   Put long in the text archive
 */
 void TextArchive::put(long src) {
-    outStream << src << " ";
+    outStream << src << ' ';
 }
 
 /** 
 *   Put long long in the text archive
 */
 void TextArchive::put(long long src) {
-    outStream << src << " ";
+    outStream << src << ' ';
 }
 
 /** 
 *   Put double in the text archive
 */  
 void TextArchive::put(double src) {
-    outStream << src << " "; 
+    outStream << src << ' ';
 }
 
 /**
 *   Put float from archive
 */
 void TextArchive::put(float src) {
-    outStream << src;
+    outStream << src << ' ';
 }
 
 /** 
 *   Put char in the text archive
 */     
 void TextArchive::put(char src) {
-    outStream << src << " "; 
+    outStream << src << ' ';
+}
+
+/**
+*   Put string in the text archive
+*/
+void TextArchive::put(std::string src) {
+    outStream << src << ' ';
 }
 
 /** 
 *   Put bool in the text archive
 */     
 void TextArchive::put(bool src) {
-    outStream << src << " "; 
+    outStream << src << ' ';
 }
 
 /** 
@@ -138,9 +125,16 @@ void TextArchive::get(bool& dest) {
 }
 
 /** 
-*   Get bool from the archive 
+*   Get char from the archive
 */
 void TextArchive::get(char& dest) {
+    inStream >> dest;
+}
+
+/**
+*   Get string from the archive
+*/
+void TextArchive::get(std::string& dest) {
     inStream >> dest;
 }
 
@@ -150,6 +144,8 @@ void TextArchive::get(char& dest) {
 void TextArchive::get(char*, std::size_t) {
     // empty body
 }
+
+
 
 }
 }

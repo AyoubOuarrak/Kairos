@@ -1,7 +1,7 @@
 #ifndef ARCHIVE_ARCHIVE_H
 #define ARCHIVE_ARCHIVE_H
 
-#include "ioarchive.h"
+#include <io_archive.h>
 
 namespace kairos {
 namespace archive {
@@ -12,14 +12,17 @@ namespace archive {
 class Archive : public IOArchive {
 public:
     /** default constructor */
-    Archive() : IOArchive() {};
+    Archive() : IOArchive("archive") {};
     explicit Archive(std::string name) : IOArchive(name) {};
 
     /** default copy constructor */
-    Archive(const Archive&) {};
+    explicit Archive(const Archive&) = delete;
+
+    /** assignment operator */
+    Archive& operator=(const Archive&) = delete;
 
     /** default distructor */
-    ~Archive() {}
+    virtual ~Archive() = default;
 };
 
 }

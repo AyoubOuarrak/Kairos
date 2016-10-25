@@ -1,7 +1,7 @@
 #ifndef INCLUDE_SERIALIZATION_SERIALIZABLE_H
 #define INCLUDE_SERIALIZATION_SERIALIZABLE_H
 
-#include "../archive/archive.h"
+#include <archive.h>
 #include <string>
 
 using namespace kairos::archive;
@@ -17,14 +17,14 @@ private:
 
 public:
     /** default constructor */
-    Serializable();
+    Serializable() {};
     /** disable copy constructor */
     Serializable(const Serializable &) = delete;
     /** disable assignment operator */
     Serializable& operator=(const Serializable&) = delete;
 
     /** default distructor */
-    virtual ~Serializable();
+    virtual ~Serializable() {};
 
     /** virtual pure method to serialize types */
     virtual void serialize(Archive&) = 0;

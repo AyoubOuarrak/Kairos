@@ -9,15 +9,16 @@ CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
 CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
 
 if(COMPILER_SUPPORTS_CXX11)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
 elseif(COMPILER_SUPPORTS_CXX0X)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x ")
 else()
         message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
 include_directories(include/utils.h)
 include_directories(include/floating_point.h)
+include_directories(include/constants.h)
 include_directories(include/archive)
 include_directories(include/archive/type)
 include_directories(include/exception)
@@ -28,6 +29,7 @@ include_directories(include/serialization/type/templates)
   
 file(GLOB SOURCES 
 	    "test/*.cpp"
+        "src/constants.cpp"
         "src/utils.cpp"
 	    "src/archive/*.cpp"
         "src/archive/types/*.cpp"
@@ -35,4 +37,4 @@ file(GLOB SOURCES
 	    "src/serialization/*.cpp"
         "src/serialization/type/*.cpp")
 
-add_executable(bin/test ${SOURCES} kairos.h)
+add_executable(main ${SOURCES} kairos.h)

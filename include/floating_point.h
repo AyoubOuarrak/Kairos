@@ -7,6 +7,8 @@ namespace detail {
 
 /**
 *   Define Macros to call the pack and unpack of floating point numbers
+*
+*   http://beej.us/guide/bgnet/output/html/singlepage/bgnet.html#serialization
 */
 #define to_uint32(f) (kairos::detail::pack754((f), 32, 8))
 #define to_uint64(f) (kairos::detail::pack754((f), 64, 11))
@@ -30,8 +32,7 @@ uint64_t pack754(long double f, unsigned bits, unsigned expbits) {
     if (f < 0) {
         sign = 1;
         fnorm = -f;
-    }
-    else {
+    } else {
         sign = 0;
         fnorm = f;
     }
@@ -39,7 +40,7 @@ uint64_t pack754(long double f, unsigned bits, unsigned expbits) {
     /** get the normalized form of f and track the exponent */
     shift = 0;
 
-    while(fnorm >= 2.0) {
+    while (fnorm >= 2.0) {
         fnorm /= 2.0;
         shift++;
     }

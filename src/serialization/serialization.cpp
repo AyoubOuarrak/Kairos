@@ -1,11 +1,7 @@
-#include "../../include/serialization/serialization.h"
+#include <serialization.h>
 
 namespace kairos {
 namespace serialization {
-
-/** constanst initializaton */
-const std::string Serialization::BINARY = "binary";
-const std::string Serialization::TEXT = "text";
 
 bool Serialization::initialized = false;
 
@@ -42,7 +38,7 @@ Serialization::~Serialization() {
 void Serialization::registerType(Serializable* obj) {
     uint16_t id = (uint16_t) reinterpret_cast<uint64_t>(obj);
     serializableObjects.insert(std::pair<Serializable*, uint16_t>(obj, id));
-    ObjectsFormatSerialization.insert(std::pair<Serializable*, std::string>(obj, Serialization::TEXT));
+    ObjectsFormatSerialization.insert(std::pair<Serializable*, std::string>(obj, kairos::SerializationFormats::TEXT));
 }
 
 /**
@@ -52,10 +48,10 @@ void Serialization::registerType(Serializable* obj, std::string type) {
     uint16_t id = (uint16_t) reinterpret_cast<uint64_t>(obj);
     serializableObjects.insert(std::pair<Serializable*, uint16_t>(obj, id));
 
-    if(type == Serialization::TEXT || type == Serialization::BINARY)
+    if(type == kairos::SerializationFormats::TEXT || type == kairos::SerializationFormats::BINARY)
         ObjectsFormatSerialization.insert(std::pair<Serializable*, std::string>(obj, type));
     else
-        throw SerializationException("wrong serialization type");
+        throw new SerializationException("wrong serialization type");
 }
 
 /**
@@ -63,7 +59,7 @@ void Serialization::registerType(Serializable* obj, std::string type) {
 */
 void Serialization::createCheckpoint(Serializable* ser) {
     std::string demangledObject = utils::demangleObject(*ser);
-    std::string definedFile = "";
+    std::string fileName = "";
     std::string serializationFormat = "";
     uint16_t id = 0;
 
@@ -71,14 +67,24 @@ void Serialization::createCheckpoint(Serializable* ser) {
     try {
         id = serializableObjects.at(ser);
         serializationFormat = ObjectsFormatSerialization.at(ser);
-        if(serializationFormat == Serialization::TEXT) {
-            TextArchive archive;
-            ser->serialize(archive);
-        }
 
-        if(serializationFormat == Serialization::BINARY) {
-            BinaryArchive archive;
+        if(serializationFormat == kairos::SerializationFormats::TEXT) {
+            TextArchive archive;
+
+            fileName = "archive.text." + demangledObject + "." + std::to_string(id);
+            archive.openOutStream(fileName);
+
             ser->serialize(archive);
+            archive.closeOutStream();
+
+        } else if(serializationFormat == kairos::SerializationFormats::BINARY) {
+            BinaryArchive archive;
+
+            fileName = "archive.binary." + demangledObject + "." + std::to_string(id);
+            archive.openOutStream(fileName, std::ios::out | std::ios::binary);
+
+            ser->serialize(archive);
+            archive.closeOutStream();
         }
 
     } catch (std::out_of_range exp) {
@@ -88,21 +94,10 @@ void Serialization::createCheckpoint(Serializable* ser) {
         throw exp;
     }
 
-    /** rename the file that contain the serialization */
-    if(std::ifstream("archive.text")) {
-        definedFile = "archive.text." + demangledObject + "." + std::to_string(id);
-        std::rename("archive.text", definedFile.c_str());
-    }
-
-    else if(std::ifstream("archive.binary")) {
-        definedFile = "archive.binary." + demangledObject + "." + std::to_string(id);
-        std::rename("archive.binary", definedFile.c_str());
-    }
-
     /** write the serialization info into the index*/
     serializationIndexOut << demangledObject << " "
                           << serializationFormat << " "
-                          << definedFile << "\n";
+                          << fileName << "\n";
 }
 
 /**
@@ -111,12 +106,12 @@ void Serialization::createCheckpoint(Serializable* ser) {
 void Serialization::checkpoint() {
     for(auto it = serializableObjects.begin(); it != serializableObjects.end(); ++it) {
         std::string serializationFormat = ObjectsFormatSerialization.at((it->first));
-        if(serializationFormat == Serialization::TEXT) {
+        if(serializationFormat == kairos::SerializationFormats::TEXT) {
             TextArchive archive;
             (it->first)->serialize(archive);
         }
 
-        if(serializationFormat == Serialization::BINARY) {
+        if(serializationFormat == kairos::SerializationFormats::BINARY) {
             BinaryArchive archive;
             (it->first)->serialize(archive);
         }

@@ -1,6 +1,8 @@
-#include "../../include/archive/types/binary.h"
 #include "../../../include/floating_point.h"
 #include <iostream>
+#include <archive.h>
+#include <types/binary.h>
+
 namespace kairos {
 namespace archive {
 
@@ -8,31 +10,14 @@ namespace archive {
 *   Default construct of the text archive
 */
 BinaryArchive::BinaryArchive() : Archive() {
-    openInStream(std::ios::in | std::ios::binary);
-    openOutStream(std::ios::out | std::ios::binary);
-    std::rename("archive", "archive.binary");
-    Archive::rename("archive.binary");
+
 }
 
 /**
 *   Constructor that open an input archive with the given fileName
 */
-BinaryArchive::BinaryArchive(const std::string fileName) : Archive(fileName) {
-
-}
-
-/**
-*   Copy operator of text archive
-*/
-BinaryArchive::BinaryArchive(const BinaryArchive&) {
-
-}
-
-/**
-*   Default distructor 
-*/
-BinaryArchive::~BinaryArchive() {
-
+BinaryArchive::BinaryArchive(std::string fileName) : Archive(fileName) {
+    openInStream(fileName, std::ios::in | std::ios::binary);
 }
 
 /**
@@ -76,7 +61,7 @@ void BinaryArchive::put(long long src) {
 */
 void BinaryArchive::put(double src) {
     uint64_t buffer = to_uint64(src);
-    put((char*)&buffer, sizeof(src));
+    put((char*)&buffer, sizeof(buffer));
 }
 
 /**
@@ -84,13 +69,20 @@ void BinaryArchive::put(double src) {
 */
 void BinaryArchive::put(float src) {
     uint32_t buffer =  to_uint32(src);
-    put((char*)&buffer, sizeof(src));
+    put((char*)&buffer, sizeof(buffer));
 }
 
 /**
 *   Put char in the Binary archive
 */
 void BinaryArchive::put(char src) {
+    outStream.write(&src, sizeof(char));
+}
+
+/**
+*   Put string in the Binary archive
+*/
+void BinaryArchive::put(std::string src) {
     put((char*)&src, sizeof(src));
 }
 
@@ -128,8 +120,8 @@ void BinaryArchive::get(long long& dst) {
 
 */
 void BinaryArchive::get(double& dst) {
-    char* buffer;
-    get(buffer, sizeof(dst));
+    uint64_t buffer;
+    get((char*)&buffer, sizeof(dst));
     dst = from_uint64((uint64_t)buffer);
 }
 
@@ -137,9 +129,9 @@ void BinaryArchive::get(double& dst) {
 *   Get float from archive
 */
 void BinaryArchive::get(float& dst) {
-    char* buffer;
-    get(buffer, sizeof(dst));
-    dst = from_uint32((uint64_t)buffer);
+    uint32_t buffer;
+    get((char*)&buffer, sizeof(buffer));
+    dst = from_uint32((uint32_t)buffer);
 }
 
 /**
@@ -153,7 +145,14 @@ void BinaryArchive::get(bool& dst) {
 *   Get bool from the archive
 */
 void BinaryArchive::get(char& dst) {
-    get((char*)dst, sizeof(dst));
+    inStream.read(&dst, sizeof(char));
+}
+
+/**
+*   Get string from the archive
+*/
+void BinaryArchive::get(std::string& dst) {
+    get((char*)dst.c_str(), sizeof(dst));
 }
 
 }

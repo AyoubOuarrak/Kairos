@@ -1,4 +1,4 @@
-#include "../../include/exception/serialization_exception.h"
+#include "serialization_exception.h"
 namespace kairos {
 namespace exception {
 
@@ -11,10 +11,10 @@ SerializationException::SerializationException(char* message, const char* info)
             
 }
 
-/** 
-*   Constructor with std string message 
+/**
+*   Constructor with std string message
 */
-SerializationException::SerializationException(std::string message, std::string info) 
+SerializationException::SerializationException(std::string message, std::string info)
     : Exception(message, info) {
     exp_type = "serialization_exception";
 }
