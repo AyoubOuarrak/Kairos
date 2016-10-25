@@ -1,4 +1,4 @@
-#include <ArchiveException.h>
+#include "archive_exception.h"
 
 namespace kairos {
 namespace exception {
@@ -6,14 +6,14 @@ namespace exception {
 /** 
 *   Constructor with char* message 
 */
-ArchiveException::ArchiveException(char* message, const char* info) : Exception(message, info) {
+ArchiveException::archive_exception(char* message, const char* info) : Exception(message, info) {
     exp_type = "archive_exception";
 }
 
 /** 
 *   Constructor with std string message 
 */
-ArchiveException::ArchiveException(std::string message, std::string info) : Exception(message, info) {
+ArchiveException::archive_exception(std::string message, std::string info) : Exception(message, info) {
     exp_type = "archive_exception";
 }
 

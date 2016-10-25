@@ -1,4 +1,4 @@
-#include <Exception.h>
+#include "kairos_exception.h"
 
 namespace kairos {
 namespace exception {
@@ -6,7 +6,7 @@ namespace exception {
 /** 
 *   Constructor with char* message 
 */
-Exception::Exception(char* message, const char* info)
+Exception::kairos_exception(char* message, const char* info)
     : exp_type("generic_exception"), exp_msg(message), exp_info(info) {
             
 }
@@ -14,7 +14,7 @@ Exception::Exception(char* message, const char* info)
 /** 
 *   Constructor with std string message 
 */
-Exception::Exception(std::string message, std::string info) 
+Exception::kairos_exception(std::string message, std::string info)
     : exp_type("generic_exception"), exp_msg(message), exp_info(info) {
     
 }
